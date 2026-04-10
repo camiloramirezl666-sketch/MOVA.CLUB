@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOVA para Runners — Move Different</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #0a0a0a;
+    color: #e8e4dc;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px;
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(232,228,220,0.06);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; color: #e8e4dc; text-decoration: none; }
+  .nav-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: rgba(232,228,220,0.3); text-transform: uppercase; }
+  .nav-cta { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: #0a0a0a; background: #e8e4dc; padding: 10px 24px; text-decoration: none; text-transform: uppercase; transition: opacity 0.3s; }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* SHARED */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; color: rgba(232,228,220,0.35); text-transform: uppercase; margin-bottom: 20px; }
+  .big-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 110px); letter-spacing: 2px; line-height: 0.95; color: #e8e4dc; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px,6vw,72px); letter-spacing: 2px; line-height: 0.95; color: #e8e4dc; }
+  .btn-wap { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; background: #e8e4dc; padding: 16px 40px; text-decoration: none; transition: opacity 0.3s; }
+  .btn-wap:hover { opacity: 0.85; }
+  .btn-wap svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .btn-ghost { display: inline-flex; align-items: center; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(232,228,220,0.5); text-decoration: none; border-bottom: 0.5px solid rgba(232,228,220,0.2); padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
+  .btn-ghost:hover { color: #e8e4dc; border-color: #e8e4dc; }
+  .divider { height: 0.5px; background: rgba(232,228,220,0.08); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 0 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    top: -10%; right: -15%;
+    pointer-events: none;
+  }
+  .hero-lines {
+    position: absolute; inset: 0;
+    /* Líneas diagonales sutiles — running feeling */
+    background-image: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 80px,
+      rgba(232,228,220,0.015) 80px,
+      rgba(232,228,220,0.015) 81px
+    );
+  }
+  .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .hero-pain { font-size: 15px; line-height: 1.8; color: rgba(232,228,220,0.45); font-weight: 300; margin: 32px 0; border-left: 1px solid rgba(232,228,220,0.15); padding-left: 24px; font-style: italic; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+  /* KM counter visual */
+  .hero-right { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+  .km-card {
+    width: 100%; max-width: 360px;
+    border: 0.5px solid rgba(232,228,220,0.08);
+    background: rgba(232,228,220,0.02);
+    padding: 48px 40px;
+    position: relative;
+    text-align: center;
+  }
+  .km-card::before { content: 'RUN DATA'; position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 4px; color: rgba(232,228,220,0.2); }
+  .km-num { font-family: 'Bebas Neue', sans-serif; font-size: 80px; letter-spacing: -2px; color: #e8e4dc; line-height: 1; }
+  .km-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 4px; color: rgba(232,228,220,0.25); text-transform: uppercase; margin-top: 8px; }
+  .km-divider { width: 40px; height: 0.5px; background: rgba(232,228,220,0.15); margin: 24px auto; }
+  /* Mini stats row */
+  .km-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .km-stat { padding: 16px 12px; border: 0.5px solid rgba(232,228,220,0.06); }
+  .km-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #e8e4dc; letter-spacing: 1px; }
+  .km-stat-lbl { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2px; color: rgba(232,228,220,0.25); text-transform: uppercase; margin-top: 4px; }
+  /* Product tags */
+  .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .pill { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 5px 14px; border: 0.5px solid rgba(232,228,220,0.1); color: rgba(232,228,220,0.35); text-transform: uppercase; }
+
+  /* PAIN POINTS */
+  .pain-section { padding: 120px 0; background: #070707; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(232,228,220,0.06); margin-top: 72px; }
+  .pain-card { background: #070707; padding: 48px 36px; }
+  .pain-icon { font-size: 28px; margin-bottom: 20px; line-height: 1; }
+  .pain-title { font-size: 15px; font-weight: 500; color: #e8e4dc; margin-bottom: 12px; }
+  .pain-text { font-size: 13px; line-height: 1.75; color: rgba(232,228,220,0.4); font-weight: 300; }
+
+  /* PRODUCTS SECTION */
+  .products-section { padding: 120px 0; }
+  .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(232,228,220,0.08); margin-top: 72px; }
+  .prod-card { background: #0a0a0a; padding: 56px; position: relative; overflow: hidden; transition: background 0.4s; }
+  .prod-card:hover { background: #111; }
+  .prod-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: rgba(232,228,220,0.3); text-transform: uppercase; margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+  .prod-tag::before { content: ''; display: inline-block; width: 20px; height: 0.5px; background: rgba(232,228,220,0.3); }
+  /* Visual sock */
+  .prod-visual { height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
+  .sock-v { width: 110px; height: 170px; }
+  .sock-v-body { width: 100%; height: 100%; background: #1c1c1c; border-radius: 14px 14px 32px 32px; border: 0.5px solid rgba(232,228,220,0.1); position: relative; }
+  .sock-v-logo { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 3px; color: rgba(232,228,220,0.5); }
+  .sock-v-grip { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: grid; grid-template-columns: repeat(5,7px); gap: 3px; }
+  .grip-dot { width: 7px; height: 7px; background: rgba(232,228,220,0.12); border-radius: 50%; border: 0.5px solid rgba(232,228,220,0.18); }
+  /* Visual sleeve */
+  .sleeve-v { width: 90px; height: 190px; }
+  .sleeve-v-body { width: 100%; height: 100%; background: #1c1c1c; border-radius: 6px 6px 16px 16px; border: 0.5px solid rgba(232,228,220,0.1); position: relative; overflow: hidden; }
+  .sleeve-v-lines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 7px, rgba(232,228,220,0.025) 7px, rgba(232,228,220,0.025) 8px); }
+  .sleeve-v-label { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); font-family: 'DM Mono', monospace; font-size: 7px; letter-spacing: 3px; color: rgba(232,228,220,0.35); white-space: nowrap; }
+  .prod-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 3px; color: #e8e4dc; margin-bottom: 12px; }
+  .prod-desc { font-size: 13px; line-height: 1.7; color: rgba(232,228,220,0.45); font-weight: 300; margin-bottom: 28px; max-width: 320px; }
+  .prod-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+  .feat-pill { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(232,228,220,0.4); border: 0.5px solid rgba(232,228,220,0.12); padding: 5px 12px; text-transform: uppercase; }
+  .prod-footer { display: flex; justify-content: space-between; align-items: center; border-top: 0.5px solid rgba(232,228,220,0.08); padding-top: 24px; }
+  .prod-price { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px; color: rgba(232,228,220,0.6); }
+  .prod-price strong { font-size: 17px; color: #e8e4dc; font-weight: 400; }
+  .btn-wap-sm { display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; background: #e8e4dc; padding: 11px 22px; text-decoration: none; transition: opacity 0.3s; }
+  .btn-wap-sm:hover { opacity: 0.85; }
+  .btn-wap-sm svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* SOLUTION */
+  .solution-section { padding: 120px 0; background: #070707; }
+  .solution-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .solution-list { margin-top: 48px; }
+  .solution-item { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 0.5px solid rgba(232,228,220,0.06); }
+  .solution-item:last-child { border-bottom: none; }
+  .sol-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: rgba(232,228,220,0.25); padding-top: 3px; min-width: 20px; }
+  .sol-title { font-size: 14px; font-weight: 500; color: #e8e4dc; margin-bottom: 8px; }
+  .sol-text { font-size: 13px; line-height: 1.7; color: rgba(232,228,220,0.4); font-weight: 300; }
+  /* Distance tracker visual */
+  .dist-visual { background: rgba(232,228,220,0.02); border: 0.5px solid rgba(232,228,220,0.08); padding: 48px 40px; }
+  .dist-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: rgba(232,228,220,0.2); text-transform: uppercase; margin-bottom: 40px; }
+  .dist-bars { display: flex; flex-direction: column; gap: 20px; }
+  .dist-row { display: flex; flex-direction: column; gap: 8px; }
+  .dist-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(232,228,220,0.35); text-transform: uppercase; display: flex; justify-content: space-between; }
+  .dist-track { height: 3px; background: rgba(232,228,220,0.06); position: relative; }
+  .dist-fill { height: 100%; background: #e8e4dc; animation: barFill 1.8s ease forwards; transform-origin: left; transform: scaleX(0); }
+  @keyframes barFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .dist-note { margin-top: 36px; padding-top: 24px; border-top: 0.5px solid rgba(232,228,220,0.06); font-size: 12px; line-height: 1.7; color: rgba(232,228,220,0.25); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; }
+
+  /* SOCIAL PROOF */
+  .proof-section { padding: 120px 0; }
+  .big-quote { margin: 80px 0; padding: 64px 80px; border: 0.5px solid rgba(232,228,220,0.08); position: relative; background: rgba(232,228,220,0.015); }
+  .big-quote::before { content: '"'; font-family: 'Bebas Neue', sans-serif; font-size: 200px; position: absolute; top: -40px; left: 40px; color: rgba(232,228,220,0.04); line-height: 1; pointer-events: none; }
+  .quote-text { font-size: clamp(17px, 2.5vw, 24px); line-height: 1.55; color: rgba(232,228,220,0.7); font-style: italic; font-weight: 300; margin-bottom: 28px; position: relative; }
+  .quote-author { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: rgba(232,228,220,0.3); text-transform: uppercase; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(232,228,220,0.06); }
+  .rev-card { background: #0a0a0a; padding: 40px 32px; }
+  .rev-stars { display: flex; gap: 3px; margin-bottom: 20px; }
+  .star-s { width: 9px; height: 9px; background: #e8e4dc; clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+  .rev-text { font-size: 13px; line-height: 1.8; color: rgba(232,228,220,0.5); font-weight: 300; font-style: italic; margin-bottom: 28px; }
+  .rev-author { display: flex; align-items: center; gap: 12px; }
+  .rev-av { width: 32px; height: 32px; border-radius: 50%; background: rgba(232,228,220,0.06); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(232,228,220,0.4); }
+  .rev-name { font-size: 13px; font-weight: 500; color: #e8e4dc; }
+  .rev-detail { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; color: rgba(232,228,220,0.25); }
+
+  /* EDU */
+  .edu-section { padding: 120px 0; background: #070707; }
+  .edu-intro { max-width: 600px; margin-top: 40px; font-size: 16px; line-height: 1.8; color: rgba(232,228,220,0.45); font-weight: 300; }
+  .edu-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: rgba(232,228,220,0.06); margin-top: 72px; }
+  .edu-card { background: #070707; padding: 48px 40px; position: relative; overflow: hidden; }
+  .edu-num { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: rgba(232,228,220,0.04); line-height: 1; margin-bottom: 24px; }
+  .edu-title { font-size: 16px; font-weight: 500; color: #e8e4dc; margin-bottom: 16px; letter-spacing: 0.5px; }
+  .edu-text { font-size: 14px; line-height: 1.8; color: rgba(232,228,220,0.4); font-weight: 300; }
+  .edu-hl { margin-top: 20px; padding: 16px 20px; border-left: 1px solid rgba(232,228,220,0.2); background: rgba(232,228,220,0.02); font-size: 13px; line-height: 1.6; color: rgba(232,228,220,0.55); font-style: italic; }
+
+  /* COMPARE */
+  .compare-section { padding: 120px 0; }
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: 72px; }
+  .compare-table th { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; padding: 20px 28px; border-bottom: 0.5px solid rgba(232,228,220,0.08); color: rgba(232,228,220,0.3); text-align: left; }
+  .compare-table th.hl { color: #e8e4dc; }
+  .compare-table td { padding: 18px 28px; border-bottom: 0.5px solid rgba(232,228,220,0.05); font-size: 13px; color: rgba(232,228,220,0.4); font-weight: 300; }
+  .compare-table td.feat { color: rgba(232,228,220,0.6); font-weight: 400; }
+  .compare-table td.mova { color: #e8e4dc; font-weight: 400; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table thead th:nth-child(2), .compare-table tbody td:nth-child(2) { background: rgba(232,228,220,0.04); border-left: 0.5px solid rgba(232,228,220,0.1); border-right: 0.5px solid rgba(232,228,220,0.1); }
+  .ck { color: #e8e4dc; }
+  .cx { color: rgba(232,228,220,0.2); }
+
+  /* CTA FINAL */
+  .final-cta { padding: 160px 0; text-align: center; position: relative; overflow: hidden; }
+  .final-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,228,220,0.04) 0%, transparent 70%); }
+  .final-big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 9vw, 100px); letter-spacing: 4px; line-height: 0.95; color: #e8e4dc; position: relative; }
+  .final-big em { display: block; color: rgba(232,228,220,0.15); font-style: normal; }
+  .final-body { margin: 40px auto 0; max-width: 460px; font-size: 14px; line-height: 1.8; color: rgba(232,228,220,0.4); font-weight: 300; position: relative; }
+  .final-actions { margin-top: 56px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .urgency { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: rgba(232,228,220,0.3); text-transform: uppercase; margin-top: 24px; position: relative; display: flex; align-items: center; gap: 8px; justify-content: center; }
+  .u-dot { width: 6px; height: 6px; border-radius: 50%; background: #e8e4dc; opacity: 0.4; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.4;transform:scale(1);} 50%{opacity:0.8;transform:scale(1.3);} }
+
+  /* FOOTER */
+  footer { border-top: 0.5px solid rgba(232,228,220,0.08); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 4px; color: rgba(232,228,220,0.5); }
+  .footer-back { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(232,228,220,0.25); text-decoration: none; text-transform: uppercase; border-bottom: 0.5px solid rgba(232,228,220,0.1); padding-bottom: 3px; transition: color 0.3s; }
+  .footer-back:hover { color: rgba(232,228,220,0.5); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .rd1{transition-delay:0.1s;} .rd2{transition-delay:0.2s;} .rd3{transition-delay:0.3s;} .rd4{transition-delay:0.4s;}
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .container { padding: 0 24px; }
+    .hero-inner, .solution-inner { grid-template-columns: 1fr; gap: 48px; }
+    .pain-grid, .edu-grid, .reviews-grid, .products-grid { grid-template-columns: 1fr; }
+    .big-quote { padding: 40px 28px; }
+    .compare-table td, .compare-table th { padding: 12px 14px; }
+    footer { flex-direction: column; gap: 16px; padding: 32px 24px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="mova-website.html" class="nav-logo">MOVA.</a>
+  <span class="nav-tag">Para Runners</span>
+  <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20las%20MOVA%20para%20running" class="nav-cta" target="_blank">Pedir ahora</a>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 1 — IMPACTO / ATENCIÓN
+═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-lines"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Para Runners · Grip Socks + Manga Compresión</p>
+        <h1 class="big-title">
+          CORRE<br>MÁS.<br>DUELE<br>MENOS.
+        </h1>
+        <p class="hero-pain">¿Ampollas después de cada rodada larga? ¿Piernas pesadas en los últimos kilómetros? ¿El pie se mueve dentro del tenis y pierdes energía con cada zancada? No es falta de entrenamiento — es falta del equipo correcto.</p>
+        <div class="hero-actions">
+          <a href="#productos" class="btn-wap" target="_blank">
+            Ver productos MOVA
+          </a>
+          <a href="#solucion" class="btn-ghost">Entender por qué ↓</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="km-card">
+          <div class="km-num">42</div>
+          <div class="km-label">Kilómetros. Sin ampollas.</div>
+          <div class="km-divider"></div>
+          <div class="km-stats">
+            <div class="km-stat">
+              <div class="km-stat-val">0</div>
+              <div class="km-stat-lbl">Ampollas</div>
+            </div>
+            <div class="km-stat">
+              <div class="km-stat-val">+18%</div>
+              <div class="km-stat-lbl">Energía km 35+</div>
+            </div>
+            <div class="km-stat">
+              <div class="km-stat-val">360°</div>
+              <div class="km-stat-lbl">Compresión</div>
+            </div>
+            <div class="km-stat">
+              <div class="km-stat-val">4</div>
+              <div class="km-stat-lbl">Tecnologías</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-pills">
+          <span class="pill">Anti-Slip</span>
+          <span class="pill">Sin ampollas</span>
+          <span class="pill">Compresión gradual</span>
+          <span class="pill">Airflow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 2 — EL PROBLEMA
+═══════════════════════════════════════ -->
+<section class="pain-section">
+  <div class="container">
+    <p class="eyebrow reveal">El problema real</p>
+    <h2 class="section-title reveal">Lo que te frena en cada kilómetro</h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal rd1">
+        <div class="pain-icon">🔥</div>
+        <div class="pain-title">Ampollas que arruinan tu rodada</div>
+        <p class="pain-text">La ampolla no aparece en el kilómetro 1. Aparece en el 18, en el 25, cuando ya no puedes parar. La fricción repetida entre el pie y el calcetín —o directamente con el tenis— destruye la piel y destruye tu ritmo. Es predecible. Y es prevenible.</p>
+      </div>
+      <div class="pain-card reveal rd2">
+        <div class="pain-icon">⚡</div>
+        <div class="pain-title">Energía que se escapa con cada paso</div>
+        <p class="pain-text">Sin grip, el pie se desliza milímetros dentro del tenis en cada zancada. Eso activa músculos estabilizadores que deberían estar descansando para el sprint final. Llegas al km 35 con piernas que en realidad no deberían estar tan pesadas.</p>
+      </div>
+      <div class="pain-card reveal rd3">
+        <div class="pain-icon">📉</div>
+        <div class="pain-title">Recuperación lenta post-rodada</div>
+        <p class="pain-text">Sin compresión adecuada, el retorno venoso es ineficiente. La sangre se acumula en las piernas, el ácido láctico tarda más en limpiarse. Al día siguiente las piernas están más pesadas de lo que deberían. Eso no es sobreentrenamiento — es falta de compresión.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 3 — LOS PRODUCTOS
+═══════════════════════════════════════ -->
+<section class="products-section" id="productos">
+  <div class="container">
+    <p class="eyebrow reveal">Performance Collection · Vol. 01</p>
+    <h2 class="section-title reveal">El stack del runner MOVA</h2>
+    <div class="products-grid">
+      <!-- Grip Socks -->
+      <div class="prod-card">
+        <p class="prod-tag">MOVA · 001</p>
+        <div class="prod-visual">
+          <div class="sock-v">
+            <div class="sock-v-body">
+              <div class="sock-v-logo">MOVA</div>
+              <div class="sock-v-grip">
+                <div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div>
+                <div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div>
+                <div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div><div class="grip-dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="prod-name">Grip Socks</h3>
+        <p class="prod-desc">Media de alto rendimiento con grip antideslizante. El pie no se mueve, no hay fricción, no hay ampolla. Diseñada para corredores que van lejos.</p>
+        <div class="prod-features">
+          <span class="feat-pill">Anti-Slip</span><span class="feat-pill">Talón reforzado</span><span class="feat-pill">Airflow</span><span class="feat-pill">Compresión</span>
+        </div>
+        <div class="prod-footer">
+          <div class="prod-price"><strong>$45.000</strong> COP</div>
+          <a href="https://wa.me/573000000000?text=Quiero%20las%20MOVA%20Grip%20Socks%20para%20running" class="btn-wap-sm" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
+            Pedir
+          </a>
+        </div>
+      </div>
+      <!-- Manga compresión -->
+      <div class="prod-card">
+        <p class="prod-tag">MOVA · 002</p>
+        <div class="prod-visual">
+          <div class="sleeve-v">
+            <div class="sleeve-v-body">
+              <div class="sleeve-v-lines"></div>
+              <div class="sleeve-v-label">MOVA.</div>
+            </div>
+          </div>
+        </div>
+        <h3 class="prod-name">Manga Compresión</h3>
+        <p class="prod-desc">Compresión gradual de pierna para runners. Reduce fatiga muscular, mejora circulación y acelera la recuperación. La diferencia entre el km 30 y el km 42.</p>
+        <div class="prod-features">
+          <span class="feat-pill">Compresión 360°</span><span class="feat-pill">Recuperación</span><span class="feat-pill">Transpirable</span><span class="feat-pill">Gradual</span>
+        </div>
+        <div class="prod-footer">
+          <div class="prod-price"><strong>$38.000</strong> COP</div>
+          <a href="https://wa.me/573000000000?text=Quiero%20la%20MOVA%20Manga%20Compresion%20para%20running" class="btn-wap-sm" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
+            Pedir
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 4 — SOLUCIÓN TÉCNICA
+═══════════════════════════════════════ -->
+<section class="solution-section" id="solucion">
+  <div class="container">
+    <div class="solution-inner">
+      <div>
+        <p class="eyebrow reveal">Tecnología · Por qué funciona</p>
+        <h2 class="section-title reveal">
+          DISEÑADO<br>PARA IR<br>LEJOS.
+        </h2>
+        <div class="solution-list">
+          <div class="solution-item reveal rd1">
+            <span class="sol-num">01</span>
+            <div>
+              <div class="sol-title">Grip que elimina la fricción</div>
+              <p class="sol-text">Los puntos de silicona crean adhesión entre la media y el tenis. El pie no se desliza, no hay rozamiento repetido y no hay ampolla. Simple y definitivo.</p>
+            </div>
+          </div>
+          <div class="solution-item reveal rd2">
+            <span class="sol-num">02</span>
+            <div>
+              <div class="sol-title">Talón con doble refuerzo</div>
+              <p class="sol-text">La zona del talón es el punto de mayor impacto en running. El tejido reforzado absorbe el golpe repetido de miles de zancadas sin desgastarse ni transferir ese impacto a la piel.</p>
+            </div>
+          </div>
+          <div class="solution-item reveal rd3">
+            <span class="sol-num">03</span>
+            <div>
+              <div class="sol-title">Compresión gradual en manga</div>
+              <p class="sol-text">Mayor compresión en el tobillo, progresivamente menor hacia arriba. Esto bombea la sangre hacia el corazón más eficientemente. Resultado: menos ácido láctico, más energía en los km finales.</p>
+            </div>
+          </div>
+          <div class="solution-item reveal rd4">
+            <span class="sol-num">04</span>
+            <div>
+              <div class="sol-title">Ventilación activa en zonas críticas</div>
+              <p class="sol-text">Malla transpirable en el empeine y parte superior. El pie respira. La temperatura se regula. Menos sudor acumulado, menos riesgo de rozadura y más sensación de frescura en distancias largas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dist-visual reveal">
+        <div class="dist-title">Rendimiento por kilómetro</div>
+        <div class="dist-bars">
+          <div class="dist-row">
+            <div class="dist-label"><span>Confort pie</span><span>Km 1-10</span></div>
+            <div class="dist-track"><div class="dist-fill" style="width:98%"></div></div>
+          </div>
+          <div class="dist-row">
+            <div class="dist-label"><span>Confort pie</span><span>Km 10-21</span></div>
+            <div class="dist-track"><div class="dist-fill" style="width:96%"></div></div>
+          </div>
+          <div class="dist-row">
+            <div class="dist-label"><span>Confort pie</span><span>Km 21-32</span></div>
+            <div class="dist-track"><div class="dist-fill" style="width:93%"></div></div>
+          </div>
+          <div class="dist-row">
+            <div class="dist-label"><span>Confort pie</span><span>Km 32-42</span></div>
+            <div class="dist-track"><div class="dist-fill" style="width:89%"></div></div>
+          </div>
+          <div class="dist-row">
+            <div class="dist-label"><span>Energía muscular</span><span>Con manga</span></div>
+            <div class="dist-track"><div class="dist-fill" style="width:88%"></div></div>
+          </div>
+          <div class="dist-row">
+            <div class="dist-label"><span>Energía muscular</span><span>Sin manga</span></div>
+            <div class="dist-track"><div class="dist-fill" style="width:54%"></div></div>
+          </div>
+        </div>
+        <div class="dist-note">
+          * Datos basados en reportes de corredores usando grip socks + manga vs. calcetines convencionales. Las métricas de energía son percepciones reportadas por atletas de resistencia.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 5 — VALIDACIÓN
+═══════════════════════════════════════ -->
+<section class="proof-section">
+  <div class="container">
+    <p class="eyebrow reveal">Atletas · Reviews reales</p>
+    <h2 class="section-title reveal">
+      RUNNERS QUE<br>YA LO<br>PROBARON.
+    </h2>
+    <div class="big-quote reveal">
+      <p class="quote-text">"Corrí mi primer 21K con las MOVA. Llegué a la meta sin una sola ampolla — cosa que nunca me había pasado en rodadas largas. Mis piernas también estaban más frescas con la manga de compresión. No vuelvo a correr sin ellas."</p>
+      <div class="quote-author">— Valentina R. · Runner amateur · Bogotá · 21K en 1:58</div>
+    </div>
+    <div class="reviews-grid">
+      <div class="rev-card reveal rd1">
+        <div class="rev-stars"><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div></div>
+        <p class="rev-text">"Antes siempre me salían ampollas en el talón después de los 15km. Con las MOVA, en mis últimas 4 rodadas largas: nada. El tejido del talón marca la diferencia total."</p>
+        <div class="rev-author">
+          <div class="rev-av">MC</div>
+          <div><div class="rev-name">Mauricio C.</div><div class="rev-detail">Runner · 42K Maratón Cali</div></div>
+        </div>
+      </div>
+      <div class="rev-card reveal rd2">
+        <div class="rev-stars"><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div></div>
+        <p class="rev-text">"La manga de compresión cambió mi recuperación. Antes al día siguiente de una rodada larga no podía bajar escaleras bien. Con MOVA, mis piernas se recuperan notablemente más rápido."</p>
+        <div class="rev-author">
+          <div class="rev-av">LP</div>
+          <div><div class="rev-name">Laura P.</div><div class="rev-detail">Runner · Trail 30K</div></div>
+        </div>
+      </div>
+      <div class="rev-card reveal rd3">
+        <div class="rev-stars"><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div></div>
+        <p class="rev-text">"Soy entrenador personal y se las recomiendo a todos mis atletas de resistencia. El grip socks + manga es el combo perfecto para cualquiera que corra más de 10km seguidos."</p>
+        <div class="rev-author">
+          <div class="rev-av">DG</div>
+          <div><div class="rev-name">Diego G.</div><div class="rev-detail">Entrenador personal · Medellín</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 6 — EDUCACIÓN PROFUNDA
+═══════════════════════════════════════ -->
+<section class="edu-section">
+  <div class="container">
+    <p class="eyebrow reveal">Educación · La ciencia detrás</p>
+    <h2 class="section-title reveal">
+      LO QUE TU<br>CUERPO<br>NECESITA.
+    </h2>
+    <p class="edu-intro reveal">Entender la fisiología del running te hace mejor atleta. Aquí está lo que nadie te explica sobre lo que le pasa a tus pies y piernas en distancias largas.</p>
+    <div class="edu-grid">
+      <div class="edu-card reveal rd1">
+        <div class="edu-num">01</div>
+        <div class="edu-title">Por qué se forman las ampollas</div>
+        <p class="edu-text">La ampolla es una respuesta de defensa de la piel ante la fricción repetida. En running, el pie se mueve miles de veces — cada movimiento no deseado dentro del tenis crea rozamiento. La piel genera líquido entre capas para protegerse. Eso es la ampolla.</p>
+        <div class="edu-hl">El grip antideslizante de MOVA elimina ese movimiento no deseado. Sin movimiento, sin fricción, sin ampolla.</div>
+      </div>
+      <div class="edu-card reveal rd2">
+        <div class="edu-num">02</div>
+        <div class="edu-title">Qué pasa con tus músculos en el km 30</div>
+        <p class="edu-text">Después de 2 horas corriendo, el glucógeno muscular cae, las fibras musculares se microdesgarran y el ácido láctico se acumula. La compresión gradual mejora el flujo sanguíneo que lleva oxígeno y remueve desechos. El músculo trabaja más tiempo antes de fatigarse.</p>
+        <div class="edu-hl">La manga de compresión no es un accesorio. Es un sistema de soporte al músculo en trabajo prolongado.</div>
+      </div>
+      <div class="edu-card reveal rd3">
+        <div class="edu-num">03</div>
+        <div class="edu-title">Por qué la temperatura del pie importa</div>
+        <p class="edu-text">Un pie sobrecalentado tiene menor sensibilidad propioceptiva — el sistema nervioso detecta el suelo con menos precisión. Eso afecta la cadencia y aumenta el riesgo de torceduras. La ventilación activa de MOVA regula temperatura y mantiene la sensibilidad táctil durante toda la rodada.</p>
+        <div class="edu-hl">Más frescura = más precisión de movimiento = menos lesiones por fatiga de pie.</div>
+      </div>
+      <div class="edu-card reveal rd4">
+        <div class="edu-num">04</div>
+        <div class="edu-title">La recuperación empieza durante la carrera</div>
+        <p class="edu-text">No esperes a terminar para pensar en recuperación. La compresión durante el esfuerzo ya está trabajando — reduciendo las micro-vibraciones que generan inflamación y mejorando el retorno venoso en tiempo real. Al terminar, el proceso de recuperación ya lleva ventaja.</p>
+        <div class="edu-hl">Usar la manga durante y después del entrenamiento maximiza la recuperación muscular.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 7 — COMPARACIÓN
+═══════════════════════════════════════ -->
+<section class="compare-section">
+  <div class="container">
+    <p class="eyebrow reveal">Comparación · La diferencia real</p>
+    <h2 class="section-title reveal">
+      MOVA VS.<br>LO QUE<br>USAS HOY.
+    </h2>
+    <table class="compare-table reveal">
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th class="hl">MOVA Grip + Manga</th>
+          <th>Calcetín deportivo normal</th>
+          <th>Sin compresión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="feat">Prevención de ampollas</td><td class="mova ck">✓ Grip + talón reforzado</td><td class="cx">Parcial</td><td class="cx">✗</td></tr>
+        <tr><td class="feat">Grip antideslizante</td><td class="mova ck">✓ Silicona HD</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+        <tr><td class="feat">Compresión gradual pierna</td><td class="mova ck">✓ Manga progresiva</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+        <tr><td class="feat">Mejora retorno venoso</td><td class="mova ck">✓ Activo durante la carrera</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+        <tr><td class="feat">Recuperación acelerada</td><td class="mova ck">✓ Post-rodada</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+        <tr><td class="feat">Ventilación activa pie</td><td class="mova ck">✓ Malla Airflow</td><td class="cx">Básica</td><td class="cx">✗</td></tr>
+        <tr><td class="feat">Rendimiento km 35+</td><td class="mova ck">✓ Músculos frescos</td><td class="cx">Fatiga normal</td><td class="cx">Fatiga alta</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+     NIVEL 8 — CTA FINAL
+═══════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="final-glow"></div>
+  <div class="container">
+    <h2 class="final-big reveal">
+      TU PRÓXIMA<br>RODADA
+      <em>ES DIFERENTE.</em>
+    </h2>
+    <p class="final-body reveal">Sin ampollas. Sin piernas pesadas en el km 35. Sin energía perdida en cada zancada. El combo Grip Socks + Manga Compresión MOVA — Performance Collection Vol. 01.</p>
+    <div class="final-actions reveal">
+      <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20el%20combo%20MOVA%20para%20running%20%28Grip%20Socks%20+%20Manga%29" class="btn-wap" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
+        Quiero el combo runner
+      </a>
+      <a href="mova-website.html" class="btn-ghost">Ver todos los productos</a>
+    </div>
+    <div class="urgency reveal"><div class="u-dot"></div>Performance Collection Vol. 01 · Edición limitada</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MOVA.</div>
+  <a href="mova-website.html" class="footer-back">← Volver al sitio principal</a>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
