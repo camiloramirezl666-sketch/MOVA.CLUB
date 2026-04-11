@@ -842,14 +842,14 @@
 
 <!-- ─── NAV ─── -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">MOVA.</a>
+  <a href="/" class="nav-logo">MOVA.</a>
   <ul class="nav-links">
     <li><a href="#products">Productos</a></li>
     <li><a href="#benefits">Beneficios</a></li>
     <li><a href="#sports">Tu deporte</a></li>
     <li><a href="#about">Nosotros</a></li>
   </ul>
-  <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20mi%20MOVA." class="nav-cta" target="_blank">Pedir ahora</a>
+  <button class="nav-cta" onclick="openCart()">Ver colección</button>
 </nav>
 
 <!-- ─── HERO ─── -->
@@ -1243,5 +1243,195 @@
 
   revealEls.forEach(el => observer.observe(el));
 </script>
+
+<!-- ─── CART PANEL ─── -->
+<style>
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    z-index: 998; opacity: 0; pointer-events: none;
+    transition: opacity 0.4s;
+    backdrop-filter: blur(4px);
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-panel {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 35%; min-width: 320px;
+    background: #0e0e0e;
+    border-left: 0.5px solid rgba(232,228,220,0.08);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .cart-panel.open { transform: translateX(0); }
+
+  .cart-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 32px 36px;
+    border-bottom: 0.5px solid rgba(232,228,220,0.06);
+  }
+  .cart-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 4px; color: #e8e4dc;
+  }
+  .cart-close {
+    background: none; border: none; cursor: pointer;
+    color: rgba(232,228,220,0.4); font-size: 22px;
+    transition: color 0.2s; padding: 4px;
+  }
+  .cart-close:hover { color: #e8e4dc; }
+
+  .cart-body { flex: 1; overflow-y: auto; padding: 32px 36px; }
+
+  .cart-label {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 4px; color: rgba(232,228,220,0.25);
+    text-transform: uppercase; margin-bottom: 32px;
+  }
+
+  .cart-product {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 0.5px solid rgba(232,228,220,0.06);
+  }
+  .cart-product:last-child { border-bottom: none; }
+
+  .cart-product-img {
+    width: 72px; height: 88px; flex-shrink: 0;
+    background: #1a1a1a;
+    border: 0.5px solid rgba(232,228,220,0.08);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cart-product-img span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    color: rgba(232,228,220,0.3);
+  }
+  .cart-product-info { flex: 1; }
+  .cart-product-ref {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    letter-spacing: 3px; color: rgba(232,228,220,0.25);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .cart-product-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    letter-spacing: 2px; color: #e8e4dc; margin-bottom: 6px;
+  }
+  .cart-product-sub {
+    font-size: 11px; color: rgba(232,228,220,0.35);
+    font-weight: 300; margin-bottom: 16px; line-height: 1.5;
+  }
+  .cart-product-price {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    letter-spacing: 1px; color: rgba(232,228,220,0.6);
+  }
+  .cart-product-price strong {
+    font-size: 16px; color: #e8e4dc; font-weight: 400;
+  }
+
+  .cart-footer {
+    padding: 28px 36px;
+    border-top: 0.5px solid rgba(232,228,220,0.06);
+  }
+  .cart-footer-note {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 2px; color: rgba(232,228,220,0.2);
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 20px;
+  }
+  .cart-btn-wa {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #0a0a0a; background: #e8e4dc;
+    padding: 16px; text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .cart-btn-wa:hover { opacity: 0.85; }
+  .cart-btn-wa svg { width: 14px; height: 14px; }
+
+  /* WhatsApp flotante */
+  .wa-float {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 52px; height: 52px;
+    background: #e8e4dc;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 997;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    transition: transform 0.3s, opacity 0.3s;
+    text-decoration: none;
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 22px; height: 22px; color: #0a0a0a; }
+
+  @media (max-width: 768px) {
+    .cart-panel { width: 100%; min-width: unset; }
+  }
+</style>
+
+<!-- Overlay -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- Cart Panel -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <span class="cart-title">Colección</span>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body">
+    <p class="cart-label">Performance Collection · Vol. 01</p>
+
+    <!-- Producto 1 -->
+    <div class="cart-product">
+      <div class="cart-product-img"><span>GS-001</span></div>
+      <div class="cart-product-info">
+        <p class="cart-product-ref">MOVA · 001</p>
+        <h4 class="cart-product-name">Grip Socks</h4>
+        <p class="cart-product-sub">Medias antideslizantes de alto rendimiento.<br>Negro · Blanco · S / M / L / XL</p>
+        <p class="cart-product-price"><strong>$45.000</strong> COP</p>
+      </div>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="cart-product">
+      <div class="cart-product-img"><span>AS-001</span></div>
+      <div class="cart-product-info">
+        <p class="cart-product-ref">MOVA · 002</p>
+        <h4 class="cart-product-name">Manga Compresión</h4>
+        <p class="cart-product-sub">Manga de compresión gradual para brazo.<br>Negro · S / M / L / XL</p>
+        <p class="cart-product-price"><strong>$38.000</strong> COP</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-footer">
+    <p class="cart-footer-note">Pedidos por WhatsApp · Envío a todo Colombia</p>
+    <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20MOVA%20Performance%20Collection%20Vol.01" class="cart-btn-wa" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
+      Pedir por WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/573000000000?text=Hola!%20Quiero%20info%20sobre%20MOVA." class="wa-float" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
+</a>
+
+<script>
+  function openCart() {
+    document.getElementById('cartPanel').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+  }
+  function closeCart() {
+    document.getElementById('cartPanel').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+</script>
+
 </body>
 </html>
