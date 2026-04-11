@@ -1554,7 +1554,7 @@
     }
     renderCart();
     updateCartBadge();
-    // Feedback en el boton en vez de abrir el carrito
+    // Feedback en el boton
     const original = btn.textContent;
     btn.textContent = '✓ Agregado';
     btn.style.background = 'rgba(232,228,220,0.15)';
@@ -1566,6 +1566,8 @@
       btn.style.color = '';
       btn.style.border = '';
     }, 1800);
+    // Abrir carrito sin overlay para no bloquear la pagina
+    openCartPreview();
   }
 
   function updateCartBadge() {
@@ -1652,6 +1654,10 @@
     return true;
   }
 
+  function openCartPreview() {
+    // Abre el panel sin overlay — la pagina sigue siendo interactiva
+    document.getElementById('cartPanel').classList.add('open');
+  }
   function openCart() {
     document.getElementById('cartPanel').classList.add('open');
     document.getElementById('cartOverlay').classList.add('open');
