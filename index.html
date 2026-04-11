@@ -1655,7 +1655,6 @@
   }
 
   function openCartPreview() {
-    // Abre el panel sin overlay — la pagina sigue siendo interactiva
     document.getElementById('cartPanel').classList.add('open');
   }
   function openCart() {
@@ -1666,6 +1665,15 @@
     document.getElementById('cartPanel').classList.remove('open');
     document.getElementById('cartOverlay').classList.remove('open');
   }
+
+  // Cerrar carrito al hacer click fuera del panel
+  document.addEventListener('click', function(e) {
+    const panel = document.getElementById('cartPanel');
+    if (!panel.classList.contains('open')) return;
+    if (!panel.contains(e.target)) {
+      closeCart();
+    }
+  });
 </script>
 
 </body>
