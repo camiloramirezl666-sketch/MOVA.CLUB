@@ -126,22 +126,36 @@
     .nav-links.open { display: flex; }
     .nav-links li { border-top: 0.5px solid rgba(232,228,220,0.06); }
     .nav-links a { display: block; padding: 18px 24px; font-size: 13px; }
-    .nav-cta { display: none; }
   }
   .nav-cta {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #0a0a0a;
-    background: #e8e4dc;
+    background: none;
     border: none;
-    padding: 10px 24px;
-    cursor: none;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: opacity 0.3s;
+    cursor: pointer;
+    padding: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #E8E4DC;
+    transition: opacity 0.2s;
   }
-  .nav-cta:hover { opacity: 0.85; }
+  .nav-cta:hover { opacity: 0.7; }
+  .nav-cta svg { width: 22px; height: 22px; }
+  .cart-badge {
+    position: absolute;
+    top: -4px; right: -6px;
+    background: #E8E4DC;
+    color: #111;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: bold;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .cart-badge.visible { display: flex; }
 
   /* ─── Hero ─── */
   .hero {
@@ -1072,7 +1086,12 @@
     <li><a href="/nosotros.html" onclick="closeMenu()">Nosotros</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:16px;">
-    <button class="nav-cta" onclick="openCart()">Ver colección</button>
+    <button class="nav-cta" onclick="openCart()" aria-label="Ver carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge"></span>
+    </button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -1849,16 +1868,10 @@
 
   function updateCartBadge() {
     const total = cart.reduce((s, i) => s + i.qty, 0);
-    let badge = document.getElementById('cart-badge');
-    if (!badge) {
-      badge = document.createElement('span');
-      badge.id = 'cart-badge';
-      badge.style.cssText = 'position:absolute;top:-6px;right:-6px;width:16px;height:16px;background:#e8e4dc;color:#0a0a0a;border-radius:50%;font-family:DM Mono,monospace;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;';
-      document.querySelector('.nav-cta').style.position = 'relative';
-      document.querySelector('.nav-cta').appendChild(badge);
-    }
+    const badge = document.getElementById('cartBadge');
+    if (!badge) return;
     badge.textContent = total;
-    badge.style.display = total > 0 ? 'flex' : 'none';
+    total > 0 ? badge.classList.add('visible') : badge.classList.remove('visible');
   }
 
   function removeFromCart(key) {
