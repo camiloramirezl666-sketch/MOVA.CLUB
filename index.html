@@ -1655,9 +1655,11 @@
   }
 
   function openCartPreview() {
+    cartJustOpened = true;
     document.getElementById('cartPanel').classList.add('open');
   }
   function openCart() {
+    cartJustOpened = true;
     document.getElementById('cartPanel').classList.add('open');
     document.getElementById('cartOverlay').classList.add('open');
   }
@@ -1667,9 +1669,11 @@
   }
 
   // Cerrar carrito al hacer click fuera del panel
+  let cartJustOpened = false;
   document.addEventListener('click', function(e) {
     const panel = document.getElementById('cartPanel');
     if (!panel.classList.contains('open')) return;
+    if (cartJustOpened) { cartJustOpened = false; return; }
     if (!panel.contains(e.target)) {
       closeCart();
     }
