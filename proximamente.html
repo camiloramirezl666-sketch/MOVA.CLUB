@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOVA — Algo viene.</title>
+<!-- SEO -->
+<meta name="description" content="Algo viene. MOVA Performance Collection Vol. 01. Regístrate para acceso temprano.">
+<meta name="author" content="MOVA">
+<link rel="canonical" href="https://movaclub.co/proximamente.html">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://movaclub.co/proximamente.html">
+<meta property="og:title" content="MOVA — Algo viene.">
+<meta property="og:description" content="No sabemos qué esperas. Pero lo que viene no lo has visto antes. Regístrate para acceso temprano.">
+<meta property="og:image" content="https://movaclub.co/images/og-cover.jpg">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="MOVA">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MOVA — Algo viene.">
+<meta name="twitter:description" content="No sabemos qué esperas. Pero lo que viene no lo has visto antes.">
+<meta name="twitter:image" content="https://movaclub.co/images/og-cover.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: #080808;
+    color: #e8e4dc;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow: hidden;
+  }
+
+  /* ─── VIDEO HERO ─── */
+  .video-bg {
+    position: fixed; inset: 0; z-index: 0;
+    overflow: hidden;
+  }
+  .video-bg video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+  }
+  /* Fallback gradient if no video */
+  .video-bg-fallback {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 120% 80% at 60% 40%, rgba(30,30,30,0.8) 0%, transparent 60%),
+      linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #080808 100%);
+  }
+
+  /* ─── NOISE ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.5;
+  }
+
+  /* ─── OVERLAY ─── */
+  .overlay {
+    position: fixed; inset: 0; z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgba(8,8,8,0.5) 0%,
+      rgba(8,8,8,0.2) 40%,
+      rgba(8,8,8,0.6) 80%,
+      rgba(8,8,8,0.95) 100%
+    );
+  }
+
+  /* ─── CONTENT ─── */
+  .content {
+    position: fixed; inset: 0; z-index: 10;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 56px 56px;
+  }
+
+  /* ─── TOP BAR ─── */
+  .top-bar {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 6px;
+    color: #e8e4dc;
+  }
+  .top-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 4px;
+    color: rgba(232,228,220,0.25);
+    text-transform: uppercase;
+  }
+
+  /* ─── MAIN ─── */
+  .main {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    gap: 0;
+  }
+
+  .pre-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 5px;
+    color: rgba(232,228,220,0.3);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .pre-label::before,
+  .pre-label::after {
+    content: '';
+    display: block; width: 40px; height: 0.5px;
+    background: rgba(232,228,220,0.15);
+  }
+
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 12vw, 140px);
+    letter-spacing: 4px; line-height: 0.9;
+    color: #e8e4dc;
+    margin-bottom: 36px;
+  }
+  .headline span {
+    display: block;
+    color: rgba(232,228,220,0.12);
+  }
+
+  .tagline {
+    font-size: 15px; line-height: 1.75;
+    color: rgba(232,228,220,0.35);
+    max-width: 420px;
+    font-style: italic;
+    margin-bottom: 56px;
+  }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-wrap {
+    display: flex; gap: 0;
+    margin-bottom: 64px;
+    border: 0.5px solid rgba(232,228,220,0.08);
+  }
+  .countdown-item {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 28px 40px;
+    border-right: 0.5px solid rgba(232,228,220,0.08);
+    min-width: 100px;
+  }
+  .countdown-item:last-child { border-right: none; }
+  .countdown-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px; line-height: 1;
+    color: #e8e4dc;
+    letter-spacing: 2px;
+  }
+  .countdown-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px; letter-spacing: 3px;
+    color: rgba(232,228,220,0.25);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ─── WAITLIST FORM ─── */
+  .waitlist-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    width: 100%; max-width: 440px;
+  }
+  .waitlist-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    color: rgba(232,228,220,0.3);
+    text-transform: uppercase;
+  }
+  .waitlist-form {
+    display: flex; width: 100%; gap: 0;
+  }
+  .waitlist-input {
+    flex: 1;
+    background: rgba(232,228,220,0.04);
+    border: 0.5px solid rgba(232,228,220,0.12);
+    border-right: none;
+    color: #e8e4dc;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 14px 20px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .waitlist-input::placeholder {
+    color: rgba(232,228,220,0.2);
+  }
+  .waitlist-input:focus {
+    border-color: rgba(232,228,220,0.3);
+  }
+  .waitlist-btn {
+    background: #e8e4dc;
+    color: #080808;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+  }
+  .waitlist-btn:hover { opacity: 0.85; }
+
+  .waitlist-success {
+    display: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    color: rgba(232,228,220,0.5);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* ─── BOTTOM ─── */
+  .bottom-bar {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .bottom-ig {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    color: rgba(232,228,220,0.2);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .bottom-ig:hover { color: rgba(232,228,220,0.5); }
+  .bottom-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 2px;
+    color: rgba(232,228,220,0.12);
+    text-transform: uppercase;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 700px) {
+    body { overflow: auto; }
+    .content {
+      position: relative;
+      padding: 28px 24px 40px;
+      min-height: 100dvh;
+    }
+    .video-bg, .overlay { position: fixed; }
+    .countdown-item { padding: 20px 20px; min-width: 70px; }
+    .countdown-num { font-size: 38px; }
+    .headline { font-size: clamp(52px, 14vw, 90px); }
+    .top-tag { display: none; }
+    .bottom-bar { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<div class="video-bg">
+  <!-- Replace src with your Las Vegas athletes video file -->
+  <video autoplay muted loop playsinline poster="">
+    <source src="images/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="video-bg-fallback"></div>
+</div>
+
+<!-- DARK OVERLAY -->
+<div class="overlay"></div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- TOP -->
+  <div class="top-bar">
+    <div class="logo">MOVA.</div>
+    <div class="top-tag">Performance Collection · Vol. 01</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="pre-label">Algo viene.</div>
+
+    <h1 class="headline">
+      MOVE<br>
+      <span>DIFFERENT.</span>
+    </h1>
+
+    <p class="tagline">
+      No sabemos qué esperas. Pero lo que viene<br>no lo has visto antes.
+    </p>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-wrap" id="countdown">
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-days">--</div>
+        <div class="countdown-label">Días</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-hours">--</div>
+        <div class="countdown-label">Horas</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-mins">--</div>
+        <div class="countdown-label">Min</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-secs">--</div>
+        <div class="countdown-label">Seg</div>
+      </div>
+    </div>
+
+    <!-- WAITLIST -->
+    <div class="waitlist-wrap">
+      <div class="waitlist-label">Lista de acceso temprano</div>
+      <form class="waitlist-form" id="waitlistForm" onsubmit="handleSubmit(event)">
+        <input
+          type="email"
+          class="waitlist-input"
+          id="emailInput"
+          placeholder="tu@correo.com"
+          required
+        >
+        <button type="submit" class="waitlist-btn">Entrar</button>
+      </form>
+      <div class="waitlist-success" id="waitlistSuccess">
+        Listo. Eres parte de esto.
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-bar">
+    <a href="https://www.instagram.com/movaclub.co/" class="bottom-ig" target="_blank">@movaclub.co</a>
+    <div class="bottom-copy">© 2025 MOVA. Colombia.</div>
+  </div>
+
+</div>
+
+<script>
+  // ─── COUNTDOWN TIMER ───
+  // Set your launch date here (YYYY, MM-1, DD, HH, MM, SS)
+  const LAUNCH_DATE = new Date('2025-11-01T00:00:00');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = LAUNCH_DATE - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ─── WAITLIST FORM ───
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value;
+
+    // Store locally
+    const list = JSON.parse(localStorage.getItem('mova_waitlist') || '[]');
+    if (!list.includes(email)) {
+      list.push(email);
+      localStorage.setItem('mova_waitlist', JSON.stringify(list));
+    }
+
+    // Show success
+    document.getElementById('waitlistForm').style.display = 'none';
+    document.getElementById('waitlistSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
