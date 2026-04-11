@@ -1565,7 +1565,7 @@
     <li><a href="#products">Productos</a></li>
     <li><a href="#benefits">Beneficios</a></li>
     <li><a href="https://wa.me/573000000000" target="_blank">WhatsApp</a></li>
-    <li><a href="https://instagram.com/mova.grip" target="_blank">Instagram</a></li>
+    <li><a href="https://www.instagram.com/movaclub.co/" target="_blank">Instagram</a></li>
   </ul>
 </footer>
 
@@ -1812,7 +1812,7 @@
 
 <script>
   // ─── Cart logic ───
-  let cart = [];
+  let cart = JSON.parse(localStorage.getItem('mova_cart') || '[]');
 
   function toggleMenu() {
     const nav = document.getElementById('navLinks');
@@ -1864,6 +1864,7 @@
     } else {
       cart.push({ key, name: productName, size, price, qty: 1 });
     }
+    saveCart();
     renderCart();
     updateCartBadge();
     // Feedback en el boton
@@ -1892,6 +1893,7 @@
 
   function removeFromCart(key) {
     cart = cart.filter(i => i.key !== key);
+    saveCart();
     renderCart();
   }
 
@@ -1900,7 +1902,12 @@
     if (!item) return;
     item.qty += delta;
     if (item.qty <= 0) cart = cart.filter(i => i.key !== key);
+    saveCart();
     renderCart();
+  }
+
+  function saveCart() {
+    localStorage.setItem('mova_cart', JSON.stringify(cart));
   }
 
   function renderCart() {
@@ -1976,6 +1983,9 @@
 
   // Cerrar carrito al hacer click fuera del panel
   let cartJustOpened = false;
+  // Restaurar badge al cargar
+  updateCartBadge();
+  renderCart();
   document.getElementById('cartPanel').addEventListener('click', function(e) {
     e.stopPropagation();
   });
