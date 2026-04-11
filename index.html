@@ -1494,7 +1494,7 @@
   <div class="cart-body">
     <p class="cart-label">Performance Collection · Vol. 01</p>
     <div id="cart-items-list">
-      <div id="cart-empty" style="text-align:center; padding: 48px 0;">
+      <div style="text-align:center; padding:48px 0;">
         <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; color:rgba(232,228,220,0.2); text-transform:uppercase;">Tu carrito está vacío</p>
         <p style="font-size:12px; color:rgba(232,228,220,0.15); margin-top:12px; font-weight:300;">Selecciona una talla y agrega tu producto</p>
       </div>
@@ -1597,19 +1597,19 @@
 
   function renderCart() {
     const list = document.getElementById('cart-items-list');
-    const empty = document.getElementById('cart-empty');
     const totalWrap = document.getElementById('cart-total-wrap');
     const totalEl = document.getElementById('cart-total');
 
     if (cart.length === 0) {
-      list.innerHTML = '';
-      list.appendChild(empty);
-      empty.style.display = 'block';
+      list.innerHTML = `
+        <div style="text-align:center; padding:48px 0;">
+          <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; color:rgba(232,228,220,0.2); text-transform:uppercase;">Tu carrito está vacío</p>
+          <p style="font-size:12px; color:rgba(232,228,220,0.15); margin-top:12px; font-weight:300;">Selecciona una talla y agrega tu producto</p>
+        </div>`;
       totalWrap.style.display = 'none';
       return;
     }
 
-    empty.style.display = 'none';
     let html = '';
     let total = 0;
     cart.forEach(item => {
