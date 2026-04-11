@@ -269,13 +269,13 @@
     display: inline-flex; align-items: center; gap: 8px;
     font-family: 'DM Mono', monospace;
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(232,228,220,0.45);
+    color: #fff;
     text-decoration: none;
-    border: 0.5px solid rgba(232,228,220,0.15);
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     padding: 14px 20px;
-    transition: color 0.3s, border-color 0.3s;
+    transition: opacity 0.3s, transform 0.2s;
   }
-  .btn-ig:hover { color: #e8e4dc; border-color: rgba(232,228,220,0.5); }
+  .btn-ig:hover { opacity: 0.88; transform: translateY(-1px); }
 
   /* Scroll indicator */
   .scroll-indicator {
