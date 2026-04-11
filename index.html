@@ -662,15 +662,14 @@
   }
   .logo-item:hover { opacity: 1; }
   .logo-shield {
-    width: 48px; height: 56px;
-    background: rgba(232,228,220,0.04);
-    border: 0.5px solid rgba(232,228,220,0.12);
-    clip-path: polygon(50% 0%, 100% 15%, 100% 60%, 50% 100%, 0% 60%, 0% 15%);
+    width: 80px; height: 80px;
     display: flex; align-items: center; justify-content: center;
   }
   .logo-shield img {
-    width: 32px; height: 32px;
-    object-fit: contain; filter: grayscale(100%) brightness(1.5);
+    width: 80px; height: 80px;
+    object-fit: contain;
+    filter: grayscale(100%) invert(1) brightness(0.85);
+    mix-blend-mode: screen;
   }
   .logo-shield-placeholder {
     font-family: 'Bebas Neue', sans-serif;
@@ -986,8 +985,8 @@
     <div class="logos-ticker">
       <!-- Bloque 1 — reemplaza los placeholder con <img src="ruta-escudo.png"> -->
       <div class="logo-item">
-        <div class="logo-shield"><div class="logo-shield-placeholder">EQUIPO<br>01</div></div>
-        <span class="logo-name">Equipo 01</span>
+        <div class="logo-shield"><img src="images/logos/georgetown-tigers.jpeg" alt="Georgetown Tigers"></div>
+        <span class="logo-name">Georgetown Tigers</span>
       </div>
       <div class="logo-item">
         <div class="logo-shield"><div class="logo-shield-placeholder">EQUIPO<br>02</div></div>
@@ -1019,8 +1018,8 @@
       </div>
       <!-- Bloque 2 duplicado para loop infinito -->
       <div class="logo-item">
-        <div class="logo-shield"><div class="logo-shield-placeholder">EQUIPO<br>01</div></div>
-        <span class="logo-name">Equipo 01</span>
+        <div class="logo-shield"><img src="images/logos/georgetown-tigers.jpeg" alt="Georgetown Tigers"></div>
+        <span class="logo-name">Georgetown Tigers</span>
       </div>
       <div class="logo-item">
         <div class="logo-shield"><div class="logo-shield-placeholder">EQUIPO<br>02</div></div>
