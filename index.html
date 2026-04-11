@@ -1553,7 +1553,33 @@
       cart.push({ key, name: productName, size, price, qty: 1 });
     }
     renderCart();
-    openCart();
+    updateCartBadge();
+    // Feedback en el boton en vez de abrir el carrito
+    const original = btn.textContent;
+    btn.textContent = '✓ Agregado';
+    btn.style.background = 'rgba(232,228,220,0.15)';
+    btn.style.color = '#e8e4dc';
+    btn.style.border = '0.5px solid rgba(232,228,220,0.3)';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.border = '';
+    }, 1800);
+  }
+
+  function updateCartBadge() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    let badge = document.getElementById('cart-badge');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.id = 'cart-badge';
+      badge.style.cssText = 'position:absolute;top:-6px;right:-6px;width:16px;height:16px;background:#e8e4dc;color:#0a0a0a;border-radius:50%;font-family:DM Mono,monospace;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;';
+      document.querySelector('.nav-cta').style.position = 'relative';
+      document.querySelector('.nav-cta').appendChild(badge);
+    }
+    badge.textContent = total;
+    badge.style.display = total > 0 ? 'flex' : 'none';
   }
 
   function removeFromCart(key) {
