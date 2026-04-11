@@ -1184,7 +1184,7 @@
 <footer>
   <div>
     <div class="footer-logo">MOVA.</div>
-    <div class="footer-tagline">Move Different · Colombia</div>
+    <div class="footer-tagline">Move Different</div>
   </div>
   <ul class="footer-links">
     <li><a href="#products">Productos</a></li>
@@ -1341,6 +1341,31 @@
     text-transform: uppercase; text-align: center;
     margin-bottom: 20px;
   }
+  .cart-size-selector {
+    display: flex; gap: 6px; margin: 12px 0 16px;
+  }
+  .cart-size-btn {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 1px; padding: 5px 10px;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    background: none; color: rgba(232,228,220,0.4);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .cart-size-btn:hover, .cart-size-btn.selected {
+    border-color: #e8e4dc; color: #e8e4dc;
+    background: rgba(232,228,220,0.06);
+  }
+  .cart-order-btn {
+    display: block; width: 100%;
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #0a0a0a; background: #e8e4dc;
+    border: none; padding: 10px; cursor: pointer;
+    transition: opacity 0.2s; text-align: center;
+    text-decoration: none; margin-top: 4px;
+  }
+  .cart-order-btn:hover { opacity: 0.85; }
+
   .cart-btn-wa {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%;
@@ -1355,7 +1380,8 @@
 
   /* WhatsApp flotante */
   .wa-float {
-    position: fixed; bottom: 32px; right: 32px;
+    position: fixed; top: 50%; right: 32px;
+    transform: translateY(-50%);
     width: 52px; height: 52px;
     background: #e8e4dc;
     border-radius: 50%;
@@ -1365,7 +1391,7 @@
     transition: transform 0.3s, opacity 0.3s;
     text-decoration: none;
   }
-  .wa-float:hover { transform: scale(1.08); }
+  .wa-float:hover { transform: translateY(-50%) scale(1.08); }
   .wa-float svg { width: 22px; height: 22px; color: #0a0a0a; }
 
   @media (max-width: 768px) {
@@ -1391,8 +1417,15 @@
       <div class="cart-product-info">
         <p class="cart-product-ref">MOVA · 001</p>
         <h4 class="cart-product-name">Grip Socks</h4>
-        <p class="cart-product-sub">Medias antideslizantes de alto rendimiento.<br>Negro · Blanco · S / M / L / XL</p>
+        <p class="cart-product-sub">Medias antideslizantes · Negro · Blanco</p>
         <p class="cart-product-price"><strong>$45.000</strong> COP</p>
+        <div class="cart-size-selector">
+          <button class="cart-size-btn" onclick="selectSize(this,'gs')">S</button>
+          <button class="cart-size-btn" onclick="selectSize(this,'gs')">M</button>
+          <button class="cart-size-btn" onclick="selectSize(this,'gs')">L</button>
+          <button class="cart-size-btn" onclick="selectSize(this,'gs')">XL</button>
+        </div>
+        <a id="gs-btn" href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20las%20MOVA%20Grip%20Socks%20Vol.01" class="cart-order-btn" target="_blank">Pedir ahora</a>
       </div>
     </div>
 
@@ -1402,8 +1435,15 @@
       <div class="cart-product-info">
         <p class="cart-product-ref">MOVA · 002</p>
         <h4 class="cart-product-name">Manga Compresión</h4>
-        <p class="cart-product-sub">Manga de compresión gradual para brazo.<br>Negro · S / M / L / XL</p>
+        <p class="cart-product-sub">Manga de compresión gradual · Negro</p>
         <p class="cart-product-price"><strong>$38.000</strong> COP</p>
+        <div class="cart-size-selector">
+          <button class="cart-size-btn" onclick="selectSize(this,'as')">S</button>
+          <button class="cart-size-btn" onclick="selectSize(this,'as')">M</button>
+          <button class="cart-size-btn" onclick="selectSize(this,'as')">L</button>
+          <button class="cart-size-btn" onclick="selectSize(this,'as')">XL</button>
+        </div>
+        <a id="as-btn" href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20la%20MOVA%20Manga%20de%20Compresion" class="cart-order-btn" target="_blank">Pedir ahora</a>
       </div>
     </div>
   </div>
@@ -1430,6 +1470,17 @@
   function closeCart() {
     document.getElementById('cartPanel').classList.remove('open');
     document.getElementById('cartOverlay').classList.remove('open');
+  }
+  function selectSize(btn, product) {
+    const group = btn.closest('.cart-size-selector').querySelectorAll('.cart-size-btn');
+    group.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const size = btn.textContent;
+    const msgs = {
+      gs: `Hola!%20Quiero%20pedir%20las%20MOVA%20Grip%20Socks%20Vol.01%20-%20Talla%20${size}`,
+      as: `Hola!%20Quiero%20pedir%20la%20MOVA%20Manga%20de%20Compresion%20-%20Talla%20${size}`
+    };
+    document.getElementById(product + '-btn').href = `https://wa.me/573000000000?text=${msgs[product]}`;
   }
 </script>
 
