@@ -145,6 +145,43 @@
       }
     }
 
+    /* ─── CLUBES ─── */
+    .clubs-section {
+      padding: 64px 48px;
+      border-top: 0.5px solid var(--line);
+      border-bottom: 0.5px solid var(--line);
+      text-align: center;
+    }
+    .clubs-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--fg-muted); margin-bottom: 40px;
+    }
+    .clubs-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 72px;
+      flex-wrap: wrap;
+    }
+    .club-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px;
+    }
+    .club-item img {
+      width: 72px; height: 72px;
+      object-fit: contain;
+    }
+    .club-item span {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    @media (max-width: 600px) {
+      .clubs-section { padding: 48px 24px; }
+      .clubs-row { gap: 40px; }
+    }
+
     /* ─── BODY TEXT ─── */
     .about-body {
       max-width: 680px; margin: 0 auto;
@@ -349,6 +386,25 @@
     <div class="milestone">
       <div class="milestone-year">2025</div>
       <div class="milestone-text">Graduado Marketing & Business<br>Nace MOVA</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CLUBES ─── -->
+<div class="clubs-section">
+  <p class="clubs-label">Equipos en mi carrera</p>
+  <div class="clubs-row">
+    <div class="club-item">
+      <img src="images/logos/atletico-nacional.png" alt="Atlético Nacional">
+      <span>Atlético Nacional</span>
+    </div>
+    <div class="club-item">
+      <img src="images/logos/envigado.png" alt="Envigado FC">
+      <span>Envigado FC</span>
+    </div>
+    <div class="club-item">
+      <img src="images/logos/georgetown-tigers.png" alt="Georgetown Tigers">
+      <span>Georgetown Tigers</span>
     </div>
   </div>
 </div>
