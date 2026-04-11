@@ -66,50 +66,44 @@
 
     /* ─── HERO ─── */
     .about-hero {
-      padding: 160px 48px 80px;
-      max-width: 900px;
-      margin: 0 auto;
+      position: relative;
+      min-height: 90vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .about-hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 22%;
+    }
+    .about-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(17,17,17,0.85) 45%, rgba(17,17,17,0.2) 100%),
+                  linear-gradient(to top, rgba(17,17,17,0.7) 0%, transparent 50%);
+    }
+    .about-hero-content {
+      position: relative; z-index: 2;
+      padding: 120px 56px 80px;
+      max-width: 680px;
     }
     .about-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--fg-dim); margin-bottom: 28px;
+      color: rgba(232,228,220,0.5); margin-bottom: 24px;
     }
     .about-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 8vw, 96px);
-      line-height: 0.95; letter-spacing: 2px;
+      font-size: clamp(56px, 8vw, 104px);
+      line-height: 0.93; letter-spacing: 2px;
       color: var(--fg); margin-bottom: 28px;
     }
     .about-subtitle {
       font-size: 17px; line-height: 1.6;
-      color: var(--fg-dim); max-width: 560px;
+      color: rgba(232,228,220,0.6); max-width: 480px;
     }
     @media (max-width: 768px) {
-      .about-hero { padding: 120px 24px 60px; }
-    }
-
-    /* ─── FOTO ─── */
-    .about-photo-wrap {
-      width: 100%; max-height: 520px; overflow: hidden;
-      border-top: 0.5px solid var(--line);
-      border-bottom: 0.5px solid var(--line);
-    }
-    .about-photo-wrap img {
-      width: 100%; height: 520px; object-fit: cover; object-position: center 22%;
-      display: block; filter: grayscale(15%);
-    }
-    .about-photo-placeholder {
-      width: 100%; height: 420px;
-      background: #1a1a1a;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 12px;
-    }
-    .about-photo-placeholder svg { opacity: 0.15; }
-    .about-photo-placeholder span {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--fg-muted);
+      .about-hero { min-height: 80vh; }
+      .about-hero-content { padding: 100px 24px 60px; }
     }
 
     /* ─── MILESTONES ─── */
@@ -312,15 +306,14 @@
 
 <!-- ─── HERO ─── -->
 <section class="about-hero">
-  <p class="about-eyebrow">Fundador · MOVA</p>
-  <h1 class="about-title">Me rompí<br>tres veces.<br>Las tres volví.</h1>
-  <p class="about-subtitle">Esta es mi historia. La historia detrás de MOVA.</p>
+  <img class="about-hero-img" src="images/camilo-action.jpg" alt="Camilo Ramírez — Georgetown Tigers #33">
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <p class="about-eyebrow">Fundador · MOVA</p>
+    <h1 class="about-title">Me rompí<br>tres veces.<br>Las tres volví.</h1>
+    <p class="about-subtitle">Esta es mi historia. La historia detrás de MOVA.</p>
+  </div>
 </section>
-
-<!-- ─── FOTO ACCIÓN ─── -->
-<div class="about-photo-wrap">
-  <img src="images/camilo-action.jpg" alt="Camilo Ramírez — Georgetown Tigers #33">
-</div>
 
 <!-- ─── MILESTONES ─── -->
 <div class="milestones-section">
