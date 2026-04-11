@@ -166,25 +166,41 @@
       .about-body p { font-size: 16px; }
     }
 
-    /* ─── PULL QUOTE ─── */
-    .pull-quote {
+    /* ─── PULL QUOTE + RETRATO ─── */
+    .quote-portrait {
       border-top: 0.5px solid var(--line);
       border-bottom: 0.5px solid var(--line);
-      padding: 64px 48px;
-      display: flex; align-items: flex-start; gap: 32px;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .quote-portrait-img {
+      overflow: hidden;
+      border-right: 0.5px solid var(--line);
+    }
+    .quote-portrait-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block; filter: grayscale(10%);
+      max-height: 520px;
+    }
+    .quote-portrait-text {
+      padding: 64px 56px;
+      display: flex; align-items: flex-start; gap: 28px;
     }
     .pull-quote-line {
       width: 2px; min-height: 80px;
-      background: var(--fg); flex-shrink: 0; margin-top: 4px;
+      background: var(--fg); flex-shrink: 0; margin-top: 6px;
     }
     .pull-quote-text {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(28px, 4vw, 48px);
+      font-size: clamp(26px, 3.5vw, 44px);
       line-height: 1.1; letter-spacing: 1px;
-      color: var(--fg); max-width: 700px;
+      color: var(--fg);
     }
     @media (max-width: 768px) {
-      .pull-quote { padding: 48px 24px; gap: 20px; }
+      .quote-portrait { grid-template-columns: 1fr; }
+      .quote-portrait-img { border-right: none; border-bottom: 0.5px solid var(--line); }
+      .quote-portrait-img img { max-height: 360px; }
+      .quote-portrait-text { padding: 48px 24px; gap: 20px; }
     }
 
     /* ─── STATS ─── */
@@ -301,16 +317,9 @@
   <p class="about-subtitle">Esta es mi historia. La historia detrás de MOVA.</p>
 </section>
 
-<!-- ─── FOTO ─── -->
+<!-- ─── FOTO ACCIÓN ─── -->
 <div class="about-photo-wrap">
-  <!-- Cuando tengas la foto, reemplaza esto por: <img src="images/camilo.jpg" alt="Camilo Ramírez"> -->
-  <div class="about-photo-placeholder">
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#E8E4DC" stroke-width="1" stroke-linecap="round">
-      <circle cx="24" cy="18" r="8"/>
-      <path d="M6 42c0-9.9 8.1-18 18-18s18 8.1 18 18"/>
-    </svg>
-    <span>Foto próximamente</span>
-  </div>
+  <img src="images/camilo-action.jpg" alt="Camilo Ramírez — Georgetown Tigers #33">
 </div>
 
 <!-- ─── MILESTONES ─── -->
@@ -351,10 +360,15 @@
   <p>A los 18, a un paso de firmar profesionalmente en Colombia, la historia se repitió. Otra lesión. Otra operación. Otra reconstrucción. Pude haberlo dejado todo ahí. Muchos lo hubieran hecho. Pero algo en mí no podía quedarse quieto. Me moví, y volví.</p>
 </div>
 
-<!-- ─── PULL QUOTE ─── -->
-<div class="pull-quote">
-  <div class="pull-quote-line"></div>
-  <p class="pull-quote-text">"El deporte no me enseñó a ganar. Me enseñó a levantarme cada vez que perdí."</p>
+<!-- ─── PULL QUOTE + RETRATO ─── -->
+<div class="quote-portrait">
+  <div class="quote-portrait-img">
+    <img src="images/camilo-portrait.jpg" alt="Camilo Ramírez">
+  </div>
+  <div class="quote-portrait-text">
+    <div class="pull-quote-line"></div>
+    <p class="pull-quote-text">"El deporte no me enseñó a ganar. Me enseñó a levantarme cada vez que perdí."</p>
+  </div>
 </div>
 
 <!-- ─── BODY CONT. ─── -->
