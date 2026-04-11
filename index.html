@@ -486,6 +486,32 @@
     color: #e8e4dc;
     font-weight: 400;
   }
+  .size-selector-wrap { margin: 16px 0 20px; }
+  .size-label {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 3px; color: rgba(232,228,220,0.3);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .size-opts { display: flex; gap: 8px; }
+  .size-opt {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 1px; width: 36px; height: 36px;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    background: none; color: rgba(232,228,220,0.4);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .size-opt:hover { border-color: rgba(232,228,220,0.5); color: #e8e4dc; }
+  .size-opt.active { border-color: #e8e4dc; color: #e8e4dc; background: rgba(232,228,220,0.06); }
+
+  .btn-add-cart {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #0a0a0a; background: #e8e4dc;
+    border: none; padding: 12px 24px;
+    cursor: pointer; transition: opacity 0.3s;
+  }
+  .btn-add-cart:hover { opacity: 0.85; }
+
   .btn-whatsapp {
     display: inline-flex;
     align-items: center;
@@ -957,14 +983,19 @@
           <span class="feature-pill">Compresión</span>
           <span class="feature-pill">Airflow</span>
           <span class="feature-pill">Estabilidad</span>
-          <span class="feature-pill">S / M / L / XL</span>
+        </div>
+        <div class="size-selector-wrap">
+          <p class="size-label">Talla</p>
+          <div class="size-opts">
+            <button class="size-opt" data-product="Grip Socks" data-price="45000" onclick="pickSize(this)">S</button>
+            <button class="size-opt" data-product="Grip Socks" data-price="45000" onclick="pickSize(this)">M</button>
+            <button class="size-opt" data-product="Grip Socks" data-price="45000" onclick="pickSize(this)">L</button>
+            <button class="size-opt" data-product="Grip Socks" data-price="45000" onclick="pickSize(this)">XL</button>
+          </div>
         </div>
         <div class="product-footer">
           <div class="product-price"><strong>$45.000</strong> COP</div>
-          <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20las%20MOVA%20Grip%20Socks%20Vol.01" class="btn-whatsapp" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
-            Pedir ahora
-          </a>
+          <button class="btn-add-cart" onclick="addToCart('Grip Socks', 45000, this)">Agregar al carrito</button>
         </div>
       </div>
 
@@ -985,14 +1016,19 @@
           <span class="feature-pill">Compresión 360°</span>
           <span class="feature-pill">Recuperación</span>
           <span class="feature-pill">Transpirable</span>
-          <span class="feature-pill">S / M / L / XL</span>
+        </div>
+        <div class="size-selector-wrap">
+          <p class="size-label">Talla</p>
+          <div class="size-opts">
+            <button class="size-opt" data-product="Manga Compresión" data-price="38000" onclick="pickSize(this)">S</button>
+            <button class="size-opt" data-product="Manga Compresión" data-price="38000" onclick="pickSize(this)">M</button>
+            <button class="size-opt" data-product="Manga Compresión" data-price="38000" onclick="pickSize(this)">L</button>
+            <button class="size-opt" data-product="Manga Compresión" data-price="38000" onclick="pickSize(this)">XL</button>
+          </div>
         </div>
         <div class="product-footer">
           <div class="product-price"><strong>$38.000</strong> COP</div>
-          <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20la%20MOVA%20Manga%20de%20Compresion" class="btn-whatsapp" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
-            Pedir ahora
-          </a>
+          <button class="btn-add-cart" onclick="addToCart('Manga Compresión', 38000, this)">Agregar al carrito</button>
         </div>
       </div>
 
@@ -1410,49 +1446,25 @@
   </div>
   <div class="cart-body">
     <p class="cart-label">Performance Collection · Vol. 01</p>
-
-    <!-- Producto 1 -->
-    <div class="cart-product">
-      <div class="cart-product-img"><span>GS-001</span></div>
-      <div class="cart-product-info">
-        <p class="cart-product-ref">MOVA · 001</p>
-        <h4 class="cart-product-name">Grip Socks</h4>
-        <p class="cart-product-sub">Medias antideslizantes · Negro · Blanco</p>
-        <p class="cart-product-price"><strong>$45.000</strong> COP</p>
-        <div class="cart-size-selector">
-          <button class="cart-size-btn" onclick="selectSize(this,'gs')">S</button>
-          <button class="cart-size-btn" onclick="selectSize(this,'gs')">M</button>
-          <button class="cart-size-btn" onclick="selectSize(this,'gs')">L</button>
-          <button class="cart-size-btn" onclick="selectSize(this,'gs')">XL</button>
-        </div>
-        <a id="gs-btn" href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20las%20MOVA%20Grip%20Socks%20Vol.01" class="cart-order-btn" target="_blank">Pedir ahora</a>
-      </div>
-    </div>
-
-    <!-- Producto 2 -->
-    <div class="cart-product">
-      <div class="cart-product-img"><span>AS-001</span></div>
-      <div class="cart-product-info">
-        <p class="cart-product-ref">MOVA · 002</p>
-        <h4 class="cart-product-name">Manga Compresión</h4>
-        <p class="cart-product-sub">Manga de compresión gradual · Negro</p>
-        <p class="cart-product-price"><strong>$38.000</strong> COP</p>
-        <div class="cart-size-selector">
-          <button class="cart-size-btn" onclick="selectSize(this,'as')">S</button>
-          <button class="cart-size-btn" onclick="selectSize(this,'as')">M</button>
-          <button class="cart-size-btn" onclick="selectSize(this,'as')">L</button>
-          <button class="cart-size-btn" onclick="selectSize(this,'as')">XL</button>
-        </div>
-        <a id="as-btn" href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20la%20MOVA%20Manga%20de%20Compresion" class="cart-order-btn" target="_blank">Pedir ahora</a>
+    <div id="cart-items-list">
+      <div id="cart-empty" style="text-align:center; padding: 48px 0;">
+        <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; color:rgba(232,228,220,0.2); text-transform:uppercase;">Tu carrito está vacío</p>
+        <p style="font-size:12px; color:rgba(232,228,220,0.15); margin-top:12px; font-weight:300;">Selecciona una talla y agrega tu producto</p>
       </div>
     </div>
   </div>
 
   <div class="cart-footer">
-    <p class="cart-footer-note">Pedidos por WhatsApp · Envío a todo Colombia</p>
-    <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20MOVA%20Performance%20Collection%20Vol.01" class="cart-btn-wa" target="_blank">
+    <div id="cart-total-wrap" style="display:none; border-top: 0.5px solid rgba(232,228,220,0.06); padding-bottom: 20px; margin-bottom: 16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.3); text-transform:uppercase;">Total</span>
+        <span id="cart-total" style="font-family:'DM Mono',monospace; font-size:16px; color:#e8e4dc; letter-spacing:1px;"></span>
+      </div>
+    </div>
+    <p class="cart-footer-note">Confirmación por WhatsApp · Envío a todo Colombia</p>
+    <a id="cart-wa-btn" href="#" class="cart-btn-wa" target="_blank" onclick="return checkCartBeforeWA()">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
-      Pedir por WhatsApp
+      Confirmar pedido
     </a>
   </div>
 </div>
@@ -1463,6 +1475,109 @@
 </a>
 
 <script>
+  // ─── Cart logic ───
+  let cart = [];
+
+  function pickSize(btn) {
+    const opts = btn.closest('.size-opts').querySelectorAll('.size-opt');
+    opts.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function addToCart(productName, price, btn) {
+    const card = btn.closest('.product-card');
+    const activeSize = card.querySelector('.size-opt.active');
+    if (!activeSize) {
+      card.querySelector('.size-label').style.color = 'rgba(232,228,220,0.7)';
+      card.querySelector('.size-label').textContent = 'Selecciona una talla';
+      setTimeout(() => {
+        card.querySelector('.size-label').style.color = '';
+        card.querySelector('.size-label').textContent = 'Talla';
+      }, 2000);
+      return;
+    }
+    const size = activeSize.textContent;
+    const key = productName + '-' + size;
+    const existing = cart.find(i => i.key === key);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ key, name: productName, size, price, qty: 1 });
+    }
+    renderCart();
+    openCart();
+  }
+
+  function removeFromCart(key) {
+    cart = cart.filter(i => i.key !== key);
+    renderCart();
+  }
+
+  function changeQty(key, delta) {
+    const item = cart.find(i => i.key === key);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.key !== key);
+    renderCart();
+  }
+
+  function renderCart() {
+    const list = document.getElementById('cart-items-list');
+    const empty = document.getElementById('cart-empty');
+    const totalWrap = document.getElementById('cart-total-wrap');
+    const totalEl = document.getElementById('cart-total');
+
+    if (cart.length === 0) {
+      list.innerHTML = '';
+      list.appendChild(empty);
+      empty.style.display = 'block';
+      totalWrap.style.display = 'none';
+      return;
+    }
+
+    empty.style.display = 'none';
+    let html = '';
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      const fmt = (item.price * item.qty).toLocaleString('es-CO');
+      html += `
+        <div style="display:flex; gap:16px; align-items:flex-start; padding:24px 0; border-bottom:0.5px solid rgba(232,228,220,0.06);">
+          <div style="width:56px; height:68px; background:#1a1a1a; border:0.5px solid rgba(232,228,220,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'DM Mono',monospace; font-size:7px; letter-spacing:2px; color:rgba(232,228,220,0.3);">MOVA</span>
+          </div>
+          <div style="flex:1;">
+            <p style="font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:2px; color:#e8e4dc; margin-bottom:4px;">${item.name}</p>
+            <p style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(232,228,220,0.3); text-transform:uppercase; margin-bottom:12px;">Talla ${item.size}</p>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <button onclick="changeQty('${item.key}',-1)" style="width:24px; height:24px; background:none; border:0.5px solid rgba(232,228,220,0.15); color:rgba(232,228,220,0.5); cursor:pointer; font-size:14px;">−</button>
+                <span style="font-family:'DM Mono',monospace; font-size:12px; color:#e8e4dc;">${item.qty}</span>
+                <button onclick="changeQty('${item.key}',1)" style="width:24px; height:24px; background:none; border:0.5px solid rgba(232,228,220,0.15); color:rgba(232,228,220,0.5); cursor:pointer; font-size:14px;">+</button>
+              </div>
+              <span style="font-family:'DM Mono',monospace; font-size:12px; color:#e8e4dc;">$${fmt}</span>
+            </div>
+          </div>
+        </div>`;
+    });
+    list.innerHTML = html;
+    totalWrap.style.display = 'block';
+    totalEl.textContent = '$' + total.toLocaleString('es-CO') + ' COP';
+    updateWALink();
+  }
+
+  function updateWALink() {
+    const lines = cart.map(i => `${i.name} Talla ${i.size} x${i.qty}`).join(', ');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString('es-CO');
+    const msg = encodeURIComponent(`Hola! Quiero pedir:\n${lines}\nTotal: $${total} COP`);
+    document.getElementById('cart-wa-btn').href = `https://wa.me/573000000000?text=${msg}`;
+  }
+
+  function checkCartBeforeWA() {
+    if (cart.length === 0) { return false; }
+    return true;
+  }
+
   function openCart() {
     document.getElementById('cartPanel').classList.add('open');
     document.getElementById('cartOverlay').classList.add('open');
@@ -1470,17 +1585,6 @@
   function closeCart() {
     document.getElementById('cartPanel').classList.remove('open');
     document.getElementById('cartOverlay').classList.remove('open');
-  }
-  function selectSize(btn, product) {
-    const group = btn.closest('.cart-size-selector').querySelectorAll('.cart-size-btn');
-    group.forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    const size = btn.textContent;
-    const msgs = {
-      gs: `Hola!%20Quiero%20pedir%20las%20MOVA%20Grip%20Socks%20Vol.01%20-%20Talla%20${size}`,
-      as: `Hola!%20Quiero%20pedir%20la%20MOVA%20Manga%20de%20Compresion%20-%20Talla%20${size}`
-    };
-    document.getElementById(product + '-btn').href = `https://wa.me/573000000000?text=${msgs[product]}`;
   }
 </script>
 
