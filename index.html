@@ -265,6 +265,17 @@
     cursor: none;
   }
   .btn-secondary:hover { color: #e8e4dc; border-color: #e8e4dc; }
+  .btn-ig {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(232,228,220,0.45);
+    text-decoration: none;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    padding: 14px 20px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .btn-ig:hover { color: #e8e4dc; border-color: rgba(232,228,220,0.5); }
 
   /* Scroll indicator */
   .scroll-indicator {
@@ -1112,6 +1123,14 @@
     <div class="hero-actions">
       <a href="#products" class="btn-primary">Ver colección</a>
       <a href="#sports" class="btn-secondary">Encuentra tu producto</a>
+      <a href="https://www.instagram.com/movaclub.co/" class="btn-ig" target="_blank" aria-label="Instagram MOVA">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+        @movaclub.co
+      </a>
     </div>
   </div>
   <div class="scroll-indicator">
