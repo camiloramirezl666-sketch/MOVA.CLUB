@@ -1670,13 +1670,14 @@
 
   // Cerrar carrito al hacer click fuera del panel
   let cartJustOpened = false;
+  document.getElementById('cartPanel').addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
   document.addEventListener('click', function(e) {
     const panel = document.getElementById('cartPanel');
     if (!panel.classList.contains('open')) return;
     if (cartJustOpened) { cartJustOpened = false; return; }
-    if (!panel.contains(e.target)) {
-      closeCart();
-    }
+    closeCart();
   });
 </script>
 
