@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — MOVA</title>
+  <meta name="description" content="La historia detrás de MOVA. Tres lesiones, una beca, y la convicción de que ningún atleta debe apagarse por falta de recursos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #111111;
+      --fg: #E8E4DC;
+      --fg-dim: rgba(232,228,220,0.45);
+      --fg-muted: rgba(232,228,220,0.2);
+      --line: rgba(232,228,220,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; letter-spacing: 4px;
+      color: var(--fg); text-decoration: none;
+    }
+    .nav-links { list-style: none; display: flex; gap: 32px; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--fg-dim); text-decoration: none; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--fg); }
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      background: var(--fg); color: var(--bg);
+      border: none; padding: 10px 20px; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.8; }
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+    }
+
+    /* ─── HERO ─── */
+    .about-hero {
+      padding: 160px 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .about-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--fg-dim); margin-bottom: 28px;
+    }
+    .about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 8vw, 96px);
+      line-height: 0.95; letter-spacing: 2px;
+      color: var(--fg); margin-bottom: 28px;
+    }
+    .about-subtitle {
+      font-size: 17px; line-height: 1.6;
+      color: var(--fg-dim); max-width: 560px;
+    }
+    @media (max-width: 768px) {
+      .about-hero { padding: 120px 24px 60px; }
+    }
+
+    /* ─── FOTO ─── */
+    .about-photo-wrap {
+      width: 100%; max-height: 520px; overflow: hidden;
+      border-top: 0.5px solid var(--line);
+      border-bottom: 0.5px solid var(--line);
+    }
+    .about-photo-wrap img {
+      width: 100%; height: 520px; object-fit: cover; object-position: top center;
+      display: block; filter: grayscale(15%);
+    }
+    .about-photo-placeholder {
+      width: 100%; height: 420px;
+      background: #1a1a1a;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+    }
+    .about-photo-placeholder svg { opacity: 0.15; }
+    .about-photo-placeholder span {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+
+    /* ─── MILESTONES ─── */
+    .milestones-section {
+      padding: 80px 48px;
+      border-bottom: 0.5px solid var(--line);
+    }
+    .milestones-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--fg-muted); margin-bottom: 48px;
+    }
+    .milestones {
+      display: flex; gap: 0;
+      border-top: 0.5px solid var(--line);
+    }
+    .milestone {
+      flex: 1; padding: 32px 24px 32px 0;
+      border-right: 0.5px solid var(--line);
+    }
+    .milestone:last-child { border-right: none; padding-right: 0; }
+    .milestone-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px; letter-spacing: 2px;
+      color: var(--fg); margin-bottom: 8px;
+    }
+    .milestone-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1px; line-height: 1.6;
+      color: var(--fg-dim);
+    }
+    @media (max-width: 768px) {
+      .milestones-section { padding: 60px 24px; }
+      .milestones { flex-direction: column; border-top: none; }
+      .milestone {
+        padding: 24px 0;
+        border-right: none;
+        border-top: 0.5px solid var(--line);
+      }
+    }
+
+    /* ─── BODY TEXT ─── */
+    .about-body {
+      max-width: 680px; margin: 0 auto;
+      padding: 80px 48px;
+    }
+    .about-body p {
+      font-size: 17px; line-height: 1.8;
+      color: var(--fg-dim); margin-bottom: 28px;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
+    @media (max-width: 768px) {
+      .about-body { padding: 60px 24px; }
+      .about-body p { font-size: 16px; }
+    }
+
+    /* ─── PULL QUOTE ─── */
+    .pull-quote {
+      border-top: 0.5px solid var(--line);
+      border-bottom: 0.5px solid var(--line);
+      padding: 64px 48px;
+      display: flex; align-items: flex-start; gap: 32px;
+    }
+    .pull-quote-line {
+      width: 2px; min-height: 80px;
+      background: var(--fg); flex-shrink: 0; margin-top: 4px;
+    }
+    .pull-quote-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.1; letter-spacing: 1px;
+      color: var(--fg); max-width: 700px;
+    }
+    @media (max-width: 768px) {
+      .pull-quote { padding: 48px 24px; gap: 20px; }
+    }
+
+    /* ─── STATS ─── */
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 0.5px solid var(--line);
+    }
+    .stat-block {
+      padding: 56px 40px;
+      border-right: 0.5px solid var(--line);
+      text-align: center;
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px; letter-spacing: 2px; line-height: 1;
+      color: var(--fg); margin-bottom: 12px;
+    }
+    .stat-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--fg-dim); line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .about-stats { grid-template-columns: 1fr; }
+      .stat-block { border-right: none; border-bottom: 0.5px solid var(--line); padding: 40px 24px; }
+      .stat-block:last-child { border-bottom: none; }
+      .stat-number { font-size: 56px; }
+    }
+
+    /* ─── CAJA NEGRA ─── */
+    .mision-box {
+      background: #fff; color: #111111;
+      padding: 80px 48px; text-align: center;
+    }
+    .mision-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(17,17,17,0.4); margin-bottom: 32px;
+    }
+    .mision-text {
+      font-size: 19px; line-height: 1.75;
+      color: #333; max-width: 620px;
+      margin: 0 auto 24px;
+    }
+    .mision-tagline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px; letter-spacing: 4px;
+      color: #111111; margin-top: 36px;
+    }
+    @media (max-width: 768px) {
+      .mision-box { padding: 60px 24px; }
+      .mision-text { font-size: 17px; }
+    }
+
+    /* ─── CIERRE ─── */
+    .about-close {
+      padding: 80px 48px; text-align: center;
+      border-top: 0.5px solid var(--line);
+    }
+    .about-close p {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px; letter-spacing: 2px;
+      color: var(--fg-dim); margin-bottom: 8px;
+    }
+    .about-close strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 3px;
+      color: var(--fg); font-weight: normal;
+    }
+    @media (max-width: 768px) {
+      .about-close { padding: 60px 24px; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 0.5px solid var(--line);
+      padding: 32px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 4px; color: var(--fg);
+      text-decoration: none;
+    }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    @media (max-width: 600px) {
+      footer { flex-direction: column; gap: 12px; padding: 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-logo">MOVA.</a>
+  <ul class="nav-links">
+    <li><a href="/#products">Productos</a></li>
+    <li><a href="/#benefits">Beneficios</a></li>
+    <li><a href="/#sports">Tu deporte</a></li>
+    <li><a href="/nosotros.html" class="active">Nosotros</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='/#products'">Ver colección</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="about-hero">
+  <p class="about-eyebrow">Fundador · MOVA</p>
+  <h1 class="about-title">Me rompí<br>tres veces.<br>Las tres volví.</h1>
+  <p class="about-subtitle">Esta es mi historia. La historia detrás de MOVA.</p>
+</section>
+
+<!-- ─── FOTO ─── -->
+<div class="about-photo-wrap">
+  <!-- Cuando tengas la foto, reemplaza esto por: <img src="images/camilo.jpg" alt="Camilo Ramírez"> -->
+  <div class="about-photo-placeholder">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#E8E4DC" stroke-width="1" stroke-linecap="round">
+      <circle cx="24" cy="18" r="8"/>
+      <path d="M6 42c0-9.9 8.1-18 18-18s18 8.1 18 18"/>
+    </svg>
+    <span>Foto próximamente</span>
+  </div>
+</div>
+
+<!-- ─── MILESTONES ─── -->
+<div class="milestones-section">
+  <p class="milestones-label">Mi línea de tiempo</p>
+  <div class="milestones">
+    <div class="milestone">
+      <div class="milestone-year">13</div>
+      <div class="milestone-text">Primera rotura de<br>ligamento cruzado</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-year">18</div>
+      <div class="milestone-text">Segunda lesión.<br>A un paso del profesionalismo</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-year">19</div>
+      <div class="milestone-text">Beca deportiva<br>Georgetown University, USA</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-year">21</div>
+      <div class="milestone-text">Tercera operación de<br>ligamento cruzado</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-year">23</div>
+      <div class="milestone-text">Capitán del equipo · más<br>minutos de la temporada</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-year">2025</div>
+      <div class="milestone-text">Graduado Marketing & Business<br>Nace MOVA</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── BODY ─── -->
+<div class="about-body">
+  <p>Me llamo Camilo Ramírez. Soy colombiano, soy atleta, y llevo más de una década aprendiendo lo que significa no rendirse.</p>
+  <p>Tenía 13 años cuando escuché las palabras que ningún deportista quiere oír: ligamento cruzado roto. Una operación, meses de recuperación, incertidumbre. Pero volví. Me moví, y volví.</p>
+  <p>A los 18, a un paso de firmar profesionalmente en Colombia, la historia se repitió. Otra lesión. Otra operación. Otra reconstrucción. Pude haberlo dejado todo ahí. Muchos lo hubieran hecho. Pero algo en mí no podía quedarse quieto. Me moví, y volví.</p>
+</div>
+
+<!-- ─── PULL QUOTE ─── -->
+<div class="pull-quote">
+  <div class="pull-quote-line"></div>
+  <p class="pull-quote-text">"El deporte no me enseñó a ganar. Me enseñó a levantarme cada vez que perdí."</p>
+</div>
+
+<!-- ─── BODY CONT. ─── -->
+<div class="about-body">
+  <p>A los 19 me gané una beca deportiva para jugar en Georgetown University, en Estados Unidos. Nuevo país, nuevo idioma, solo. Lejos de mi familia, de mi tierra, de todo lo conocido. Fue el capítulo más difícil y el más formativo de mi vida.</p>
+  <p>En mi segundo año, con 21 años, llegó la tercera. Otro ligamento cruzado. En suelo extranjero, sin mi familia cerca, en medio de mis estudios y mi carrera deportiva. Ese fue el momento que me redefinió por completo.</p>
+  <p>Porque esta vez no solo me recuperé físicamente. Me senté a estudiar cada producto, cada tecnología, cada método que me ayudó a volver más rápido y más fuerte. Entendí que los accesorios correctos no son un lujo — son una herramienta que cambia el resultado.</p>
+  <p>En mi última temporada, volví al campo. Fui capitán de mi equipo y el jugador con más minutos de toda la temporada. No porque todo hubiera salido perfecto. Sino porque nunca paré de moverme.</p>
+</div>
+
+<!-- ─── STATS ─── -->
+<div class="about-stats">
+  <div class="stat-block">
+    <div class="stat-number">3</div>
+    <div class="stat-desc">Operaciones de ligamento<br>cruzado superadas</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-number">4</div>
+    <div class="stat-desc">Años en Georgetown<br>University, USA</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-number">2×</div>
+    <div class="stat-desc">Titulación en Marketing<br>y Business</div>
+  </div>
+</div>
+
+<!-- ─── CUERPO FINAL ─── -->
+<div class="about-body">
+  <p>MOVA nació de toda esa experiencia acumulada. De años usando, probando y entendiendo qué productos realmente funcionan y cuáles son solo marketing vacío. De los contactos, el conocimiento y la tecnología que descubrí a lo largo de este camino, y que hoy quiero poner al servicio de todos los atletas que merecen lo mejor.</p>
+  <p>Pero más allá del producto, MOVA nació de una convicción profunda: hay atletas que se apagan no porque les falte talento, sino porque les faltan los recursos correctos en el momento correcto. Una lesión sin tratamiento adecuado puede acabar con una carrera entera. Yo lo viví. Y eso no debería pasarle a nadie más.</p>
+  <p>Por eso construí MOVA. Para que ningún atleta tenga que elegir entre su sueño y sus medios.</p>
+</div>
+
+<!-- ─── MISIÓN ─── -->
+<div class="mision-box">
+  <p class="mision-eyebrow">Mi razón social</p>
+  <p class="mision-text">Por cada meta que MOVA alcance, un atleta que no tenga los recursos para recuperarse de una lesión recibirá el apoyo que necesita para volver a brillar.</p>
+  <p class="mision-text">Porque ningún sueño debería apagarse por falta de medios.</p>
+  <p class="mision-tagline">Move Different.</p>
+</div>
+
+<!-- ─── CIERRE ─── -->
+<div class="about-close">
+  <p>Bienvenido a MOVA.</p>
+  <strong>— Camilo Ramírez, Fundador</strong>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="/" class="footer-logo">MOVA.</a>
+  <span class="footer-copy">© 2025 MOVA. Todos los derechos reservados.</span>
+</footer>
+
+</body>
+</html>
