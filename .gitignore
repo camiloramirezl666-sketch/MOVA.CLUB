@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.p12
+*.pfx
+node_modules/
+.vercel/
+MOVA_Brand_Manual_Drop01.pdf
+*.pdf

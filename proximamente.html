@@ -262,7 +262,6 @@
 
 <!-- VIDEO BACKGROUND -->
 <div class="video-bg">
-  <!-- Replace src with your Las Vegas athletes video file -->
   <video autoplay muted loop playsinline poster="">
     <source src="images/hero-video.mp4" type="video/mp4">
   </video>
@@ -320,6 +319,7 @@
       <form class="waitlist-form" id="waitlistForm" onsubmit="handleSubmit(event)">
         <input
           type="email"
+          autocomplete="email"
           class="waitlist-input"
           id="emailInput"
           placeholder="tu@correo.com"
@@ -335,7 +335,7 @@
 
   <!-- BOTTOM -->
   <div class="bottom-bar">
-    <a href="https://www.instagram.com/movaclub.co/" class="bottom-ig" target="_blank">@movaclub.co</a>
+    <a href="https://www.instagram.com/movaclub.co/" class="bottom-ig" target="_blank" rel="noopener noreferrer">@movaclub.co</a>
     <div class="bottom-copy">© 2025 MOVA. Colombia.</div>
   </div>
 
@@ -373,20 +373,34 @@
   setInterval(updateCountdown, 1000);
 
   // ─── WAITLIST FORM ───
-  function handleSubmit(e) {
+  // TODO: Crear cuenta en formspree.io, crear un form, y reemplazar
+  // 'TU_FORMSPREE_ID' con el ID que te dan (ej: 'xpwzgkab')
+  const FORMSPREE_ID = 'TU_FORMSPREE_ID';
+
+  async function handleSubmit(e) {
     e.preventDefault();
     const email = document.getElementById('emailInput').value;
+    const btn = document.querySelector('.waitlist-btn');
+    btn.textContent = '...';
+    btn.disabled = true;
 
-    // Store locally
-    const list = JSON.parse(localStorage.getItem('mova_waitlist') || '[]');
-    if (!list.includes(email)) {
-      list.push(email);
-      localStorage.setItem('mova_waitlist', JSON.stringify(list));
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email, _subject: 'Nuevo signup waitlist MOVA' })
+      });
+      if (res.ok) {
+        document.getElementById('waitlistForm').style.display = 'none';
+        document.getElementById('waitlistSuccess').style.display = 'block';
+      } else {
+        btn.textContent = 'Entrar';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Entrar';
+      btn.disabled = false;
     }
-
-    // Show success
-    document.getElementById('waitlistForm').style.display = 'none';
-    document.getElementById('waitlistSuccess').style.display = 'block';
   }
 </script>
 </body>
