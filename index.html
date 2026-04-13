@@ -409,25 +409,55 @@
     display: flex;
     flex-direction: column;
   }
-  .product-photo {
+  /* ─── Product Stage (Apple-style display) ─── */
+  .product-stage {
     width: 100%;
-    height: 320px;
-    background: transparent;
+    height: 380px;
+    background: #161616;
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    padding: 32px 24px 16px;
   }
-  .product-photo img {
-    width: 100%;
-    height: 100%;
+  /* Studio glow — simulates overhead lighting */
+  .product-stage::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65%;
+    height: 65%;
+    background: radial-gradient(ellipse at center top,
+      rgba(232,228,220,0.07) 0%,
+      rgba(232,228,220,0.02) 40%,
+      transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Vignette — dissolves white image edges into dark stage */
+  .product-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 72% 72% at 50% 50%,
+      transparent 30%,
+      rgba(22,22,22,0.6) 60%,
+      #161616 82%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .product-stage img {
+    width: 86%;
+    height: 86%;
     object-fit: contain;
-    object-position: center;
-    transition: transform 0.5s ease;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .product-card:hover .product-photo img {
-    transform: scale(1.04);
+  .product-card:hover .product-stage img {
+    transform: scale(1.05) translateY(-8px);
   }
   /* Color selector */
   .color-selector-wrap { margin-bottom: 16px; }
@@ -479,91 +509,6 @@
     background: rgba(232,228,220,0.3);
   }
 
-  /* Product visual area */
-  .product-visual {
-    height: 260px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    position: relative;
-  }
-  /* Grip sock illustration */
-  .sock-visual {
-    width: 140px;
-    height: 200px;
-    position: relative;
-  }
-  .sock-body {
-    width: 100%;
-    height: 100%;
-    background: #1a1a1a;
-    border-radius: 20px 20px 40px 40px;
-    position: relative;
-    border: 0.5px solid rgba(232,228,220,0.1);
-  }
-  .sock-logo {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: rgba(232,228,220,0.6);
-  }
-  .sock-grip {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: grid;
-    grid-template-columns: repeat(5,8px);
-    gap: 4px;
-  }
-  .grip-dot {
-    width: 8px; height: 8px;
-    background: rgba(232,228,220,0.15);
-    border-radius: 50%;
-    border: 0.5px solid rgba(232,228,220,0.2);
-  }
-  /* Sleeve visual */
-  .sleeve-visual {
-    width: 100px;
-    height: 220px;
-    position: relative;
-  }
-  .sleeve-body {
-    width: 100%;
-    height: 100%;
-    background: #1a1a1a;
-    border-radius: 8px 8px 20px 20px;
-    border: 0.5px solid rgba(232,228,220,0.1);
-    position: relative;
-    overflow: hidden;
-  }
-  .sleeve-lines {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 8px,
-      rgba(232,228,220,0.03) 8px,
-      rgba(232,228,220,0.03) 9px
-    );
-  }
-  .sleeve-label {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'DM Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 3px;
-    color: rgba(232,228,220,0.4);
-    white-space: nowrap;
-  }
 
   .product-name {
     font-family: 'Bebas Neue', sans-serif;
@@ -1249,8 +1194,8 @@
 
       <!-- Product 1: Grip Socks -->
       <div class="product-card">
-        <div class="product-photo">
-          <img id="socks-img" src="images/product-grip-socks.png" alt="MOVA Grip Socks">
+        <div class="product-stage">
+          <img id="socks-img" src="images/product-grip-socks.jpg" alt="MOVA Grip Socks">
         </div>
         <div class="product-card-body">
         <p class="product-tag">MOVA · 001</p>
@@ -1293,8 +1238,8 @@
 
       <!-- Product 2: Manga compresión -->
       <div class="product-card">
-        <div class="product-photo">
-          <img src="images/product-arm-sleeves.png" alt="MOVA Arm Sleeves">
+        <div class="product-stage">
+          <img src="images/product-arm-sleeve.jpg" alt="MOVA Arm Sleeves">
         </div>
         <div class="product-card-body">
         <p class="product-tag">MOVA · 002</p>
