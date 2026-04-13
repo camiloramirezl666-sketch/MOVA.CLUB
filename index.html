@@ -409,55 +409,50 @@
     display: flex;
     flex-direction: column;
   }
-  /* ─── Product Stage (Apple-style display) ─── */
+  /* ─── Product Stage (display case) ─── */
   .product-stage {
     width: 100%;
     height: 380px;
-    background: #161616;
+    background: #0a0a0a;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
   }
-  /* Studio glow — simulates overhead lighting */
+  /* Inner lit surface — product rests here */
   .product-stage::before {
     content: '';
     position: absolute;
-    top: -10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 65%;
-    height: 65%;
-    background: radial-gradient(ellipse at center top,
-      rgba(232,228,220,0.07) 0%,
-      rgba(232,228,220,0.02) 40%,
-      transparent 70%);
-    pointer-events: none;
-    z-index: 1;
+    inset: 20px;
+    background: linear-gradient(160deg, #f5f3f0 0%, #eceae6 100%);
+    border-radius: 2px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9),
+                inset 0 -1px 0 rgba(0,0,0,0.06);
   }
-  /* Vignette — dissolves white image edges into dark stage */
+  /* Subtle top light on the surface */
   .product-stage::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 72% 72% at 50% 50%,
-      transparent 30%,
-      rgba(22,22,22,0.6) 60%,
-      #161616 82%);
+    inset: 20px;
+    background: linear-gradient(to bottom,
+      rgba(255,255,255,0.45) 0%,
+      transparent 45%);
+    border-radius: 2px;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
   }
   .product-stage img {
-    width: 86%;
-    height: 86%;
+    width: 82%;
+    height: 82%;
     object-fit: contain;
     position: relative;
-    z-index: 1;
+    z-index: 2;
     transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .product-card:hover .product-stage img {
-    transform: scale(1.05) translateY(-8px);
+    transform: scale(1.04) translateY(-6px);
   }
   /* Color selector */
   .color-selector-wrap { margin-bottom: 16px; }
