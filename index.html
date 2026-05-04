@@ -1434,52 +1434,130 @@
 </section>
 
 <!-- ─── DROP COUNTER + EMAIL CAPTURE ─── -->
-<section style="background:#0a0a0a; padding:100px 0; border-top:0.5px solid rgba(232,228,220,0.06);">
-  <div class="container" style="max-width:720px;">
+<!-- ─── DROP 01 JOURNEY ─── -->
+<section id="drop01" style="background:#0a0a0a; border-top:0.5px solid rgba(232,228,220,0.06); overflow:hidden;">
 
-    <!-- Contador Drop -->
-    <div style="display:flex; align-items:center; gap:16px; margin-bottom:56px;" class="reveal">
-      <div style="flex:1; height:0.5px; background:rgba(232,228,220,0.1);"></div>
-      <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:4px; color:rgba(232,228,220,0.3); text-transform:uppercase; white-space:nowrap;">Drop 01 · Edición Limitada</span>
-      <div style="flex:1; height:0.5px; background:rgba(232,228,220,0.1);"></div>
+  <!-- CAMINO: título -->
+  <div style="padding:80px 24px 0; text-align:center;" class="reveal">
+    <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:5px; color:rgba(232,228,220,0.25); text-transform:uppercase; margin-bottom:20px;">Performance Collection · Drop 01</p>
+    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,12vw,120px); line-height:0.9; letter-spacing:2px; color:#e8e4dc;">SOLO<br><span style="color:rgba(232,228,220,0.12);">300</span><br>ENTRAN.</h2>
+    <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:rgba(232,228,220,0.3); margin-top:20px; text-transform:uppercase;">Una sola vez. Sin reposición.</p>
+  </div>
+
+  <!-- CAMINO: barra de progreso visual -->
+  <div style="padding:56px 24px 0; max-width:600px; margin:0 auto;" class="reveal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <span style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.3); text-transform:uppercase;">0 unidades</span>
+      <span style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.3); text-transform:uppercase;">300 unidades</span>
+    </div>
+    <div style="height:2px; background:rgba(232,228,220,0.08); position:relative; overflow:hidden;">
+      <div id="drop-bar" style="position:absolute; left:0; top:0; height:100%; width:0%; background:#e8e4dc; transition:width 1.8s cubic-bezier(0.16,1,0.3,1);"></div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+      <span id="drop-pct" style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.2); text-transform:uppercase;">Drop limitado</span>
+    </div>
+  </div>
+
+  <!-- CAMINO: hitos verticales -->
+  <div style="max-width:560px; margin:0 auto; padding:64px 24px 0;">
+
+    <div style="display:flex; gap:24px; align-items:flex-start; margin-bottom:48px;" class="reveal">
+      <div style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:0;">
+        <div style="width:32px; height:32px; border:0.5px solid rgba(232,228,220,0.2); display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:9px; color:rgba(232,228,220,0.4); letter-spacing:1px;">01</div>
+        <div style="width:0.5px; height:48px; background:rgba(232,228,220,0.08);"></div>
+      </div>
+      <div style="padding-top:6px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:#e8e4dc; line-height:1;">EDICIÓN ÚNICA.</div>
+        <p style="font-size:13px; color:rgba(232,228,220,0.35); font-weight:300; margin-top:8px; line-height:1.7;">300 pares. No hay más. No habrá reorden. Cuando se acaben, se acabó esta versión para siempre.</p>
+      </div>
     </div>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:rgba(232,228,220,0.08); border:0.5px solid rgba(232,228,220,0.08); margin-bottom:80px;" class="reveal">
-      <div style="background:#0a0a0a; padding:32px 24px; text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1; color:#e8e4dc; letter-spacing:2px;">300</div>
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.3); margin-top:8px; text-transform:uppercase;">Unidades totales</div>
+    <div style="display:flex; gap:24px; align-items:flex-start; margin-bottom:48px;" class="reveal">
+      <div style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:0;">
+        <div style="width:32px; height:32px; border:0.5px solid rgba(232,228,220,0.2); display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:9px; color:rgba(232,228,220,0.4); letter-spacing:1px;">02</div>
+        <div style="width:0.5px; height:48px; background:rgba(232,228,220,0.08);"></div>
       </div>
-      <div style="background:#0a0a0a; padding:32px 24px; text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1; color:#e8e4dc; letter-spacing:2px;">01</div>
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.3); margin-top:8px; text-transform:uppercase;">Drop único</div>
-      </div>
-      <div style="background:#0a0a0a; padding:32px 24px; text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1; color:#e8e4dc; letter-spacing:2px;">2</div>
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.3); margin-top:8px; text-transform:uppercase;">Colores disponibles</div>
+      <div style="padding-top:6px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:#e8e4dc; line-height:1;">EL QUE SE MUEVE PRIMERO.</div>
+        <p style="font-size:13px; color:rgba(232,228,220,0.35); font-weight:300; margin-top:8px; line-height:1.7;">Los que se registran hoy son los primeros en saber cuando salga. Antes que nadie. Sin algoritmos en el medio.</p>
       </div>
     </div>
 
-    <!-- Email Capture -->
-    <div class="reveal">
-      <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:4px; color:rgba(232,228,220,0.3); text-transform:uppercase; margin-bottom:16px;">Acceso anticipado</p>
-      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,72px); line-height:0.95; letter-spacing:1px; color:#e8e4dc; margin-bottom:8px;">SABER PRIMERO.<br><span style="color:rgba(232,228,220,0.2);">MOVERSE PRIMERO.</span></h2>
-      <p style="font-size:13px; color:rgba(232,228,220,0.4); font-weight:300; margin-bottom:36px; max-width:400px; line-height:1.7;">Cuando el Drop 01 esté disponible, los primeros registrados son los primeros en recibir el aviso. Sin spam. Solo señal.</p>
-
-      <form id="drop-form" onsubmit="handleDropForm(event)" style="display:flex; gap:0; max-width:480px;">
-        <input type="email" id="drop-email" required placeholder="tu@correo.com"
-          style="flex:1; background:rgba(232,228,220,0.04); border:0.5px solid rgba(232,228,220,0.15); border-right:none; color:#e8e4dc; font-family:'DM Mono',monospace; font-size:12px; letter-spacing:1px; padding:16px 20px; outline:none; min-width:0;">
-        <button type="submit" id="drop-btn"
-          style="background:#e8e4dc; color:#0a0a0a; border:none; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; padding:16px 24px; cursor:pointer; white-space:nowrap; transition:opacity 0.2s;">
-          ENTRAR →
-        </button>
-      </form>
-      <div id="drop-success" style="display:none; margin-top:20px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; color:rgba(232,228,220,0.5);">
-        ✓ &nbsp;REGISTRADO. TE AVISAMOS PRIMERO.
+    <div style="display:flex; gap:24px; align-items:flex-start; margin-bottom:64px;" class="reveal">
+      <div style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:0;">
+        <div style="width:32px; height:32px; border:0.5px solid rgba(232,228,220,0.6); display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:9px; color:rgba(232,228,220,0.8); letter-spacing:1px;">03</div>
+      </div>
+      <div style="padding-top:6px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:#e8e4dc; line-height:1;">CONVIÉRTETE EN ATLETA MOVA.</div>
+        <p style="font-size:13px; color:rgba(232,228,220,0.35); font-weight:300; margin-top:8px; line-height:1.7;">No vendemos medias. Construimos un movimiento. 300 atletas que eligen moverse diferente.</p>
       </div>
     </div>
 
   </div>
+
+  <!-- FORMULARIO -->
+  <div style="background:rgba(232,228,220,0.03); border-top:0.5px solid rgba(232,228,220,0.06); border-bottom:0.5px solid rgba(232,228,220,0.06); padding:64px 24px;" class="reveal">
+    <div style="max-width:520px; margin:0 auto; text-align:center;">
+      <p style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:5px; color:rgba(232,228,220,0.25); text-transform:uppercase; margin-bottom:20px;">Únete al drop</p>
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,8vw,64px); line-height:0.95; letter-spacing:1px; color:#e8e4dc; margin-bottom:12px;">QUIERO SER<br>UNO DE LOS 300.</h3>
+      <p style="font-size:13px; color:rgba(232,228,220,0.35); font-weight:300; line-height:1.7; margin-bottom:36px;">Regístrate y te avisamos primero cuando el Drop 01 esté disponible.<br>Sin spam. Solo señal.</p>
+
+      <form id="drop-form" onsubmit="handleDropForm(event)">
+        <div style="display:flex; gap:0; max-width:440px; margin:0 auto 12px;">
+          <input type="email" id="drop-email" required placeholder="tu@correo.com"
+            style="flex:1; background:rgba(232,228,220,0.05); border:0.5px solid rgba(232,228,220,0.15); border-right:none; color:#e8e4dc; font-family:'DM Mono',monospace; font-size:12px; letter-spacing:1px; padding:16px 20px; outline:none; min-width:0;">
+          <button type="submit" id="drop-btn"
+            style="background:#e8e4dc; color:#0a0a0a; border:none; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; padding:16px 24px; cursor:pointer; white-space:nowrap; transition:opacity 0.2s; font-weight:500;">
+            ENTRAR →
+          </button>
+        </div>
+        <p style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:rgba(232,228,220,0.18); text-transform:uppercase;">300 cupos · Drop 01 · Colombia</p>
+      </form>
+    </div>
+  </div>
+
 </section>
+
+<!-- ─── PANTALLA BIENVENIDA MOVA ─── -->
+<div id="mova-welcome" style="display:none; position:fixed; inset:0; z-index:9000; background:#0a0a0a; overflow-y:auto;">
+  <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 24px; text-align:center; position:relative;">
+
+    <!-- Líneas decorativas -->
+    <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(232,228,220,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(232,228,220,0.03) 1px,transparent 1px); background-size:60px 60px; pointer-events:none;"></div>
+
+    <div style="position:relative; z-index:1; max-width:600px;">
+      <p style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:5px; color:rgba(232,228,220,0.25); text-transform:uppercase; margin-bottom:32px;" id="welcome-label">Drop 01 · Confirmado</p>
+
+      <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,15vw,140px); line-height:0.88; letter-spacing:2px; color:#e8e4dc; margin-bottom:32px;">
+        BIENVENIDO<br>A LA<br><span style="color:rgba(232,228,220,0.15);">FAMILIA.</span>
+      </h1>
+
+      <div style="width:40px; height:0.5px; background:rgba(232,228,220,0.2); margin:0 auto 32px;"></div>
+
+      <p style="font-size:15px; color:rgba(232,228,220,0.45); font-weight:300; line-height:1.9; margin-bottom:48px; max-width:420px; margin-left:auto; margin-right:auto;">
+        No eres un cliente.<br>
+        Eres parte del primer movimiento.<br>
+        <strong style="color:rgba(232,228,220,0.7); font-weight:400;">300 atletas. Una sola oportunidad.</strong><br>
+        Cuando el Drop 01 esté listo, tú eres el primero en saberlo.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:8px; align-items:center; margin-bottom:56px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:4px; color:rgba(232,228,220,0.2); text-transform:uppercase;">Mientras tanto</div>
+        <a href="https://www.instagram.com/mova.grip/" target="_blank" rel="noopener noreferrer"
+          style="display:inline-flex; align-items:center; gap:10px; border:0.5px solid rgba(232,228,220,0.15); color:#e8e4dc; text-decoration:none; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; padding:14px 28px; text-transform:uppercase; transition:border-color 0.2s;">
+          SÍGUENOS EN @MOVA.GRIP
+        </a>
+      </div>
+
+      <p style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(232,228,220,0.15); text-transform:uppercase;">Move Different.</p>
+    </div>
+
+    <button onclick="document.getElementById('mova-welcome').style.display='none'"
+      style="position:fixed; top:24px; right:24px; background:none; border:0.5px solid rgba(232,228,220,0.15); color:rgba(232,228,220,0.4); font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; padding:10px 16px; cursor:pointer; text-transform:uppercase; z-index:2;">
+      ✕ CERRAR
+    </button>
+  </div>
+</div>
 
 <!-- ─── CTA FINAL ─── -->
 <section class="cta-section">
@@ -1853,9 +1931,28 @@
         body: JSON.stringify({ email, fuente: 'MOVA Drop 01 — Lista de espera' })
       });
     } catch(err) {}
-    document.getElementById('drop-form').style.display = 'none';
-    document.getElementById('drop-success').style.display = 'block';
+    // Mostrar pantalla de bienvenida
+    const welcome = document.getElementById('mova-welcome');
+    welcome.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => { document.body.style.overflow = ''; }, 100);
   }
+
+  // Animación barra drop al hacer scroll
+  (function() {
+    const bar = document.getElementById('drop-bar');
+    if (!bar) return;
+    let animated = false;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          setTimeout(() => { bar.style.width = '72%'; }, 200);
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(bar.parentElement);
+  })();
 
   // ─── Cart logic ───
   // Catálogo de precios oficiales — fuente de verdad para totales
