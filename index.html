@@ -8,20 +8,35 @@
 <meta name="description" content="MOVA — Grip Socks de rendimiento para atletas serios. Medias antideslizantes de alto rendimiento. Performance Collection Vol. 01. Colombia.">
 <meta name="keywords" content="grip socks colombia, medias antideslizantes futbol, accesorios deportivos colombia, mova, mova grip">
 <meta name="author" content="MOVA">
-<link rel="canonical" href="https://movaclub.co/">
+<link rel="canonical" href="https://movagrip.com/">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://movaclub.co/">
+<meta property="og:url" content="https://movagrip.com/">
 <meta property="og:title" content="MOVA. — Move Different">
 <meta property="og:description" content="Grip Socks de rendimiento para atletas serios. Performance Collection Vol. 01. Drop limitado — 300 unidades.">
-<meta property="og:image" content="https://movaclub.co/images/og-cover.jpg">
+<meta property="og:image" content="https://movagrip.com/images/og-cover.jpg">
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="MOVA">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MOVA. — Move Different">
 <meta name="twitter:description" content="Accesorios de rendimiento para atletas serios. Performance Collection Vol. 01.">
-<meta name="twitter:image" content="https://movaclub.co/images/og-cover.jpg">
+<meta name="twitter:image" content="https://movagrip.com/images/og-cover.jpg">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="apple-touch-icon" href="/images/favicon.png">
+<!-- JSON-LD Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MOVA",
+  "url": "https://movagrip.com",
+  "logo": "https://movagrip.com/images/favicon.png",
+  "description": "Accesorios de rendimiento para atletas serios. Performance Collection Vol. 01.",
+  "sameAs": ["https://www.instagram.com/movaclub.co"]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   /* ─── Reset & Base ─── */
@@ -129,6 +144,9 @@
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   @media (max-width: 768px) {
+    .hero { padding: 0 24px 64px; }
+    .hero-title { font-size: clamp(60px, 18vw, 120px); }
+    .scroll-indicator { display: none; }
     .hamburger { display: flex; }
     .nav-links {
       display: none;
