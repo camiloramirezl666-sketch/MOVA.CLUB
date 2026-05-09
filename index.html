@@ -677,6 +677,71 @@
   .btn-whatsapp:hover { opacity: 0.85; }
   .btn-whatsapp svg { width: 14px; height: 14px; }
 
+  /* ─── Coming Soon Card ─── */
+  .product-card.coming-soon {
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card.coming-soon .product-stage img {
+    filter: blur(6px) brightness(0.4);
+    transform: scale(1.05);
+  }
+  .product-card.coming-soon:hover .product-stage img {
+    filter: blur(5px) brightness(0.45);
+    transform: scale(1.08) translateY(-4px);
+  }
+  .coming-soon-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .coming-soon-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(232,228,220,0.9);
+    border: 0.5px solid rgba(232,228,220,0.3);
+    padding: 8px 20px;
+    background: rgba(10,10,10,0.6);
+    backdrop-filter: blur(4px);
+  }
+  .coming-soon-drop {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232,228,220,0.35);
+  }
+  .product-card.coming-soon .product-name,
+  .product-card.coming-soon .product-desc,
+  .product-card.coming-soon .product-tag {
+    opacity: 0.5;
+  }
+  .product-card.coming-soon .product-footer {
+    border-top: 0.5px solid rgba(232,228,220,0.05);
+  }
+  .notify-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(232,228,220,0.5);
+    background: none;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+    width: 100%;
+  }
+  .notify-btn:hover { border-color: rgba(232,228,220,0.4); color: #e8e4dc; }
+
   /* ─── Benefits / Why MOVA ─── */
   .benefits {
     padding: 160px 0;
@@ -1280,6 +1345,32 @@
         </div>
       </div>
 
+
+      <!-- MOVA Guard — Coming Soon -->
+      <div class="product-card coming-soon">
+        <div class="product-stage">
+          <img src="images/product-guard.jpg" alt="MOVA Guard">
+          <div class="coming-soon-overlay">
+            <span class="coming-soon-badge">Coming Soon</span>
+            <span class="coming-soon-drop">Drop 02 — 2025</span>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-tag">MOVA · 002</div>
+          <h3 class="product-name">Guard</h3>
+          <p class="product-desc">Protección de alto impacto con estructura hexagonal integrada. Diseñadas para el atleta que no le saca el pie a nada.</p>
+          <div class="product-features">
+            <span class="feature-pill">Hex Protection</span>
+            <span class="feature-pill">Compresión</span>
+            <span class="feature-pill">Bajo Perfil</span>
+            <span class="feature-pill">Ligero</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price" style="color:rgba(232,228,220,0.25); font-size:11px; letter-spacing:2px;">Precio por revelar</div>
+            <button class="notify-btn" onclick="this.textContent='✓ Te avisamos'; this.style.color='#e8e4dc'; this.style.borderColor='rgba(232,228,220,0.4)';">Avísame cuando salga</button>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
