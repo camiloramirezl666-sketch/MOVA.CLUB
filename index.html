@@ -1459,18 +1459,6 @@
           </div>
         </div>
 
-        <div class="size-selector-wrap">
-          <p class="color-label">Elige tu talla — <span id="socks-size-name">S/M</span></p>
-          <div class="color-opts">
-            <button class="size-opt-btn selected" id="size-sm" onclick="pickSockSize(this, 'S/M')">
-              <span class="color-opt-label">S/M</span>
-            </button>
-            <button class="size-opt-btn" id="size-lxl" onclick="pickSockSize(this, 'L/XL')">
-              <span class="color-opt-label">L/XL</span>
-            </button>
-          </div>
-        </div>
-
         <div class="product-footer">
           <div class="product-price"><strong>$45.000</strong> COP</div>
           <div class="product-footer-btns">
@@ -2227,7 +2215,7 @@
     'Grip Socks — Blanco': 45000,
     'Grip Socks': 45000
   };
-  const VALID_SIZES = ['S/M', 'L/XL', 'S', 'M', 'L', 'XL'];
+  const VALID_SIZES = ['S/M', 'L/XL', 'S', 'M', 'L', 'XL', 'Única'];
 
   function sanitizeCart(rawCart) {
     return rawCart.filter(i =>
@@ -2289,8 +2277,8 @@
   }
 
   function addToCart(productName, price, btn) {
-    const selectedSize = document.getElementById('socks-size-name') ? document.getElementById('socks-size-name').textContent : 'S/M';
-    const key = productName + ' — ' + selectedSize;
+    const selectedSize = 'Única';
+    const key = productName + '-' + selectedSize;
     const existing = cart.find(i => i.key === key);
     if (existing) {
       existing.qty++;
