@@ -306,19 +306,6 @@
   .proof-section {
     padding: 120px 0; background: #070707;
   }
-  .proof-big-quote {
-    margin: 80px 0;
-    padding: 64px 80px;
-    border: 0.5px solid rgba(232,228,220,0.08);
-    position: relative;
-    background: rgba(232,228,220,0.015);
-  }
-  .proof-big-quote::before {
-    content: '"';
-    font-family: 'Bebas Neue', sans-serif; font-size: 200px;
-    position: absolute; top: -40px; left: 40px;
-    color: rgba(232,228,220,0.04); line-height: 1; pointer-events: none;
-  }
   .quote-text {
     font-size: clamp(18px, 2.5vw, 26px); line-height: 1.5;
     color: rgba(232,228,220,0.7); font-style: italic; font-weight: 300;
@@ -328,38 +315,40 @@
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 3px; color: rgba(232,228,220,0.3); text-transform: uppercase;
   }
-
-  .reviews-grid {
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
-    background: rgba(232,228,220,0.06);
+  .beta-testimonial {
+    display: grid; grid-template-columns: 1fr 1fr;
+    margin-top: 72px;
+    border: 0.5px solid rgba(232,228,220,0.08);
   }
-  .review-card {
-    background: #070707; padding: 40px 32px;
+  .beta-photo-wrap {
+    position: relative; overflow: hidden; min-height: 440px;
   }
-  .review-stars {
-    display: flex; gap: 3px; margin-bottom: 20px;
+  .beta-photo {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+    display: block; filter: grayscale(20%);
   }
-  .star-s {
-    width: 9px; height: 9px; background: #e8e4dc;
-    clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  .beta-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 60%, #070707 100%);
   }
-  .review-text {
-    font-size: 13px; line-height: 1.8;
-    color: rgba(232,228,220,0.5); font-weight: 300; font-style: italic;
-    margin-bottom: 28px;
+  .beta-content {
+    padding: 64px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-left: 0.5px solid rgba(232,228,220,0.08);
   }
-  .review-author { display: flex; align-items: center; gap: 12px; }
-  .review-av {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: rgba(232,228,220,0.06);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    color: rgba(232,228,220,0.4);
-  }
-  .review-name { font-size: 13px; font-weight: 500; color: #e8e4dc; }
-  .review-detail {
+  .beta-badge {
     font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 1px; color: rgba(232,228,220,0.25);
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(232,228,220,0.3);
+    border: 0.5px solid rgba(232,228,220,0.1);
+    display: inline-block; padding: 6px 12px;
+    margin-bottom: 32px; width: fit-content;
+  }
+  @media (max-width: 900px) {
+    .beta-testimonial { grid-template-columns: 1fr; }
+    .beta-photo-wrap { min-height: 280px; }
+    .beta-photo-overlay { background: linear-gradient(to top, #070707 10%, transparent 60%); }
+    .beta-content { padding: 40px 24px; border-left: none; border-top: 0.5px solid rgba(232,228,220,0.08); }
   }
 
   /* ─── EDUCATION (Nivel 4 — entendimiento profundo) ─── */
@@ -505,8 +494,8 @@
     .container { padding: 0 24px; }
     .hero-inner { grid-template-columns: 1fr; gap: 48px; }
     .solution-inner { grid-template-columns: 1fr; }
-    .pain-grid, .edu-grid, .reviews-grid { grid-template-columns: 1fr; }
-    .proof-big-quote { padding: 40px 32px; }
+    .pain-grid, .edu-grid { grid-template-columns: 1fr; }
+    
     .compare-table td, .compare-table th { padding: 14px 16px; }
     footer { flex-direction: column; gap: 16px; padding: 32px 24px; text-align: center; }
   }
@@ -689,59 +678,24 @@
 <div class="divider"></div>
 
 <!-- ─────────────────────────────────────────
-     NIVEL 4 — VALIDACIÓN (testimonios reales)
+     NIVEL 4 — VALIDACIÓN (probado en cancha)
 ───────────────────────────────────────── -->
 <section class="proof-section">
   <div class="container">
-    <p class="eyebrow reveal">Atletas · Reviews reales</p>
+    <p class="eyebrow reveal">Beta Vol. 01 · Probado en cancha real</p>
     <h2 class="big-title reveal" style="font-size: clamp(40px,6vw,72px);">
-      LO QUE<br>DICEN LOS<br>QUE YA<br>LAS USAN.
+      LO QUE<br>PASA CUANDO<br>LO USAS.
     </h2>
 
-    <div class="proof-big-quote reveal">
-      <p class="quote-text">"Llevo 3 años jugando en ligas locales y siempre tuve el problema del pie que resbala dentro del guayo. Probé las MOVA y en el primer partido lo noté. Ya no pienso en el pie — pienso en el juego."</p>
-      <div class="quote-author">— Carlos V. · Mediocampista · Liga Bogotá</div>
-    </div>
-
-    <div class="reviews-grid">
-      <div class="review-card reveal rd1">
-        <div class="review-stars">
-          <div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div>
-        </div>
-        <p class="review-text">"El grip es real. En los cambios de dirección rápidos siento que el pie queda fijo. Eso me da más confianza para arrancar más fuerte sin miedo a resbalar."</p>
-        <div class="review-author">
-          <div class="review-av">JP</div>
-          <div>
-            <div class="review-name">Juan P.</div>
-            <div class="review-detail">Delantero · Medellín</div>
-          </div>
-        </div>
+    <div class="beta-testimonial reveal">
+      <div class="beta-photo-wrap">
+        <img src="/images/testimonial-camilo.jpg" alt="Camilo Ramírez · Georgetown Tigers" class="beta-photo">
+        <div class="beta-photo-overlay"></div>
       </div>
-      <div class="review-card reveal rd2">
-        <div class="review-stars">
-          <div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div>
-        </div>
-        <p class="review-text">"Antes me salían ampollas en los talones después de partidos largos. Con las MOVA nada. El tejido en el talón es más grueso y no siento fricción en ningún momento."</p>
-        <div class="review-author">
-          <div class="review-av">SM</div>
-          <div>
-            <div class="review-name">Santiago M.</div>
-            <div class="review-detail">Defensa · Cali</div>
-          </div>
-        </div>
-      </div>
-      <div class="review-card reveal rd3">
-        <div class="review-stars">
-          <div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div><div class="star-s"></div>
-        </div>
-        <p class="review-text">"El packaging ya te prepara para algo diferente. Y en cancha se nota el nivel. Mis compañeros preguntaron qué medias tenía en el primer entrenamiento."</p>
-        <div class="review-author">
-          <div class="review-av">LG</div>
-          <div>
-            <div class="review-name">Luis G.</div>
-            <div class="review-detail">Portero · Barranquilla</div>
-          </div>
-        </div>
+      <div class="beta-content">
+        <div class="beta-badge">Beta Tester · Drop 01</div>
+        <p class="quote-text">"Me ayudaron mucho en rendimiento esta temporada. Se sienten suaves, muy cómodas — y la diferencia en cancha se nota desde el primer partido."</p>
+        <div class="quote-author">— Camilo Ramírez · Capitán · Georgetown Tigers NCAA</div>
       </div>
     </div>
   </div>
