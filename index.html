@@ -1459,6 +1459,18 @@
           </div>
         </div>
 
+        <div class="size-selector-wrap">
+          <p class="color-label">Elige tu talla — <span id="socks-size-name">S/M</span></p>
+          <div class="color-opts">
+            <button class="size-opt-btn selected" id="size-sm" onclick="pickSockSize(this, 'S/M')">
+              <span class="color-opt-label">S/M</span>
+            </button>
+            <button class="size-opt-btn" id="size-lxl" onclick="pickSockSize(this, 'L/XL')">
+              <span class="color-opt-label">L/XL</span>
+            </button>
+          </div>
+        </div>
+
         <div class="product-footer">
           <div class="product-price"><strong>$45.000</strong> COP</div>
           <div class="product-footer-btns">
@@ -2064,6 +2076,17 @@
     text-transform: uppercase; text-align: center;
     margin-bottom: 20px;
   }
+  .size-opt-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: none; border: 0.5px solid rgba(232,228,220,0.2);
+    color: rgba(232,228,220,0.60); cursor: pointer;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 1px; padding: 6px 16px;
+    transition: all 0.2s;
+  }
+  .size-opt-btn:hover { border-color: rgba(232,228,220,0.5); color: #e8e4dc; }
+  .size-opt-btn.selected { border-color: #e8e4dc; color: #e8e4dc; background: rgba(232,228,220,0.06); }
+
   .cart-size-selector {
     display: flex; gap: 6px; margin: 12px 0 16px;
   }
@@ -2241,6 +2264,12 @@
     document.getElementById('hamburger').classList.remove('open');
   }
 
+  function pickSockSize(btn, size) {
+    document.querySelectorAll('.size-opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('socks-size-name').textContent = size;
+  }
+
   function pickSockColor(btn, color) {
     document.querySelectorAll('.color-opt').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
@@ -2260,13 +2289,13 @@
   }
 
   function addToCart(productName, price, btn) {
-    const card = btn.closest('.product-card');
-    const key = productName;
+    const selectedSize = document.getElementById('socks-size-name') ? document.getElementById('socks-size-name').textContent : 'S/M';
+    const key = productName + ' — ' + selectedSize;
     const existing = cart.find(i => i.key === key);
     if (existing) {
       existing.qty++;
     } else {
-      cart.push({ key, name: productName, size, price, qty: 1 });
+      cart.push({ key, name: productName, size: selectedSize, price, qty: 1 });
     }
     saveCart();
     renderCart();
