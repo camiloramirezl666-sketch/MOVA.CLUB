@@ -1157,6 +1157,58 @@
   .founders-form input:focus { border-color: rgba(232,228,220,0.4); }
   .founders-form input::placeholder { color: rgba(232,228,220,0.25); }
   .founders-form input:first-child { border-right: 0.5px solid rgba(232,228,220,0.08); }
+  /* Phone with country selector */
+  .phone-wrap {
+    display: flex; flex: 1;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    border-right: none;
+    background: rgba(232,228,220,0.05);
+    position: relative;
+  }
+  .phone-wrap:focus-within { border-color: rgba(232,228,220,0.4); }
+  .country-select {
+    position: relative; flex-shrink: 0;
+    border-right: 0.5px solid rgba(232,228,220,0.1);
+  }
+  .country-trigger {
+    display: flex; align-items: center; gap: 6px;
+    padding: 16px 14px;
+    cursor: pointer; user-select: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1px;
+    color: #e8e4dc;
+    background: none; border: none; outline: none;
+    white-space: nowrap;
+  }
+  .country-trigger svg { width: 8px; height: 8px; opacity: 0.4; transition: transform 0.2s; }
+  .country-select.open .country-trigger svg { transform: rotate(180deg); }
+  .country-dropdown {
+    display: none;
+    position: absolute; top: 100%; left: 0;
+    background: #1a1a1a;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    z-index: 10; min-width: 160px;
+  }
+  .country-select.open .country-dropdown { display: block; }
+  .country-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 1px;
+    color: rgba(232,228,220,0.7);
+    cursor: pointer; transition: background 0.15s;
+  }
+  .country-option:hover { background: rgba(232,228,220,0.06); color: #e8e4dc; }
+  .phone-wrap input {
+    flex: 1; border: none !important;
+    background: transparent;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1px;
+    color: #e8e4dc;
+    padding: 16px 20px;
+    outline: none;
+  }
+  .phone-wrap input::placeholder { color: rgba(232,228,220,0.25); }
   .founders-btn {
     font-family: 'DM Mono', monospace;
     font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
@@ -1183,6 +1235,7 @@
     .founders-form { flex-direction: column; }
     .founders-form input { border-right: 0.5px solid rgba(232,228,220,0.15); border-bottom: none; }
     .founders-form input:first-child { border-bottom: 0.5px solid rgba(232,228,220,0.08); border-right: 0.5px solid rgba(232,228,220,0.15); }
+    .phone-wrap { border-right: 0.5px solid rgba(232,228,220,0.15); border-bottom: none; }
     .founders-btn { padding: 16px; }
   }
 
@@ -1810,7 +1863,20 @@
   </p>
   <form class="founders-form reveal" id="foundersForm" onsubmit="submitFounders(event)">
     <input type="text" id="foundersName" placeholder="Tu nombre" required autocomplete="given-name">
-    <input type="tel" id="foundersPhone" placeholder="WhatsApp (ej: 3001234567)" required autocomplete="tel">
+    <div class="phone-wrap">
+      <div class="country-select" id="countrySelect">
+        <button type="button" class="country-trigger" onclick="toggleCountry()">
+          <span id="countryFlag">🇺🇸</span>
+          <span id="countryCode">+1</span>
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="country-dropdown">
+          <div class="country-option" onclick="selectCountry('🇺🇸','+1')">🇺🇸 &nbsp;+1 &nbsp;USA</div>
+          <div class="country-option" onclick="selectCountry('🇨🇴','+57')">🇨🇴 &nbsp;+57 &nbsp;Colombia</div>
+        </div>
+      </div>
+      <input type="tel" id="foundersPhone" placeholder="300 123 4567" required autocomplete="tel">
+    </div>
     <button type="submit" class="founders-btn">Registrarme</button>
   </form>
   <div class="founders-success" id="foundersSuccess">
@@ -2422,30 +2488,42 @@
   });
 
   // ─── LISTA DE FUNDADORES ───
-  // Reemplaza esta URL con la de tu Google Apps Script después de configurarlo
   const FOUNDERS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbz0Kr94eYEU-q9MXOcmmlPM36UztxLKi1wBy9IQt5pT5ZZl_IgLk3rwXar0qNJzyXwR/exec';
+  let selectedCountryCode = '+1';
+
+  function toggleCountry() {
+    document.getElementById('countrySelect').classList.toggle('open');
+  }
+  function selectCountry(flag, code) {
+    selectedCountryCode = code;
+    document.getElementById('countryFlag').textContent = flag;
+    document.getElementById('countryCode').textContent = code;
+    document.getElementById('countrySelect').classList.remove('open');
+    document.getElementById('foundersPhone').focus();
+  }
+  document.addEventListener('click', function(e) {
+    const cs = document.getElementById('countrySelect');
+    if (cs && !cs.contains(e.target)) cs.classList.remove('open');
+  });
 
   function submitFounders(e) {
     e.preventDefault();
     const nombre = document.getElementById('foundersName').value.trim();
-    const telefono = document.getElementById('foundersPhone').value.trim();
-    if (!nombre || !telefono) return;
+    const numero = document.getElementById('foundersPhone').value.trim().replace(/\s/g, '');
+    const telefono = selectedCountryCode + ' ' + document.getElementById('foundersPhone').value.trim();
+    const telefonoWA = selectedCountryCode.replace('+', '') + numero;
+    if (!nombre || !numero) return;
 
-    // Enviar datos a Google Sheets
-    if (FOUNDERS_SHEET_URL !== 'PENDIENTE_URL_APPS_SCRIPT') {
-      fetch(FOUNDERS_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, telefono, fecha: new Date().toISOString() })
-      });
-    }
+    fetch(FOUNDERS_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, telefono, fecha: new Date().toISOString() })
+    });
 
-    // Mostrar mensaje de éxito
     document.getElementById('foundersForm').style.display = 'none';
     document.getElementById('foundersSuccess').style.display = 'block';
 
-    // Abrir WhatsApp de MOVA con mensaje prellenado
     setTimeout(() => {
       const msg = encodeURIComponent(`Hola MOVA! Me registré para el acceso anticipado del Drop 01. Mi nombre es ${nombre} 🤙`);
       window.open(`https://wa.me/${MOVA_WA}?text=${msg}`, '_blank');
