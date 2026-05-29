@@ -77,9 +77,43 @@
       transition: opacity 0.2s;
     }
     .nav-cta:hover { opacity: 0.8; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--fg);
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
     @media (max-width: 768px) {
       nav { padding: 16px 24px; }
-      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 61px; left: 0; right: 0;
+        background: rgba(17,17,17,0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 0.5px solid var(--line);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 0.5px solid rgba(232,228,220,0.06); }
+      .nav-links a { display: block; padding: 18px 24px; font-size: 13px; }
+      .nav-cta { display: none; }
     }
 
     /* ─── HERO ─── */
@@ -332,6 +366,18 @@
       font-size: 18px; letter-spacing: 3px;
       color: var(--fg); font-weight: normal;
     }
+    .about-cta {
+      display: inline-block;
+      margin-top: 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--bg);
+      background: var(--fg);
+      padding: 14px 32px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .about-cta:hover { opacity: 0.85; }
     @media (max-width: 768px) {
       .about-close { padding: 60px 24px; }
     }
@@ -369,6 +415,9 @@
     <li><a href="/nosotros.html" class="active">About</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location.href='/#products'">Ver colección</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ─── HERO ─── -->
@@ -497,13 +546,20 @@
 <div class="about-close">
   <p>Bienvenido a MOVA.</p>
   <strong>— Camilo Ramírez, Fundador</strong>
+  <a href="/#products" class="about-cta">Ver la colección →</a>
 </div>
 
 <!-- ─── FOOTER ─── -->
 <footer>
   <a href="/" class="footer-logo">MOVA.</a>
-  <span class="footer-copy">© 2025 MOVA. Todos los derechos reservados.</span>
+  <span class="footer-copy">© 2026 MOVA. Todos los derechos reservados.</span>
 </footer>
 
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+</script>
 </body>
 </html>
