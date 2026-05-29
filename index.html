@@ -1112,6 +1112,80 @@
   }
   .footer-links a:hover { color: rgba(232,228,220,0.6); }
 
+  /* ─── LISTA DE FUNDADORES ─── */
+  .founders-section {
+    padding: 100px 48px;
+    border-top: 0.5px solid rgba(232,228,220,0.08);
+    text-align: center;
+  }
+  .founders-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(232,228,220,0.35); margin-bottom: 24px;
+  }
+  .founders-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 2px; line-height: 1;
+    color: #e8e4dc; margin-bottom: 20px;
+  }
+  .founders-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1px; line-height: 1.8;
+    color: rgba(232,228,220,0.45);
+    max-width: 420px; margin: 0 auto 48px;
+  }
+  .founders-sub strong {
+    color: rgba(232,228,220,0.8); font-weight: normal;
+  }
+  .founders-form {
+    display: flex; gap: 0;
+    max-width: 560px; margin: 0 auto 20px;
+  }
+  .founders-form input {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1px;
+    background: rgba(232,228,220,0.05);
+    border: 0.5px solid rgba(232,228,220,0.15);
+    border-right: none;
+    color: #e8e4dc;
+    padding: 16px 20px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .founders-form input:focus { border-color: rgba(232,228,220,0.4); }
+  .founders-form input::placeholder { color: rgba(232,228,220,0.25); }
+  .founders-form input:first-child { border-right: 0.5px solid rgba(232,228,220,0.08); }
+  .founders-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    background: #e8e4dc; color: #0a0a0a;
+    border: none; padding: 16px 28px;
+    cursor: pointer; transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .founders-btn:hover { opacity: 0.85; }
+  .founders-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(232,228,220,0.2);
+  }
+  .founders-success {
+    display: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(232,228,220,0.6);
+    padding: 20px 0;
+  }
+  @media (max-width: 768px) {
+    .founders-section { padding: 72px 24px; }
+    .founders-form { flex-direction: column; }
+    .founders-form input { border-right: 0.5px solid rgba(232,228,220,0.15); border-bottom: none; }
+    .founders-form input:first-child { border-bottom: 0.5px solid rgba(232,228,220,0.08); border-right: 0.5px solid rgba(232,228,220,0.15); }
+    .founders-btn { padding: 16px; }
+  }
+
   /* ─── Reveal animations ─── */
   .reveal {
     opacity: 0;
@@ -1725,6 +1799,26 @@
   </div>
 </div>
 
+<!-- ─── LISTA DE FUNDADORES ─── -->
+<section class="founders-section" id="founders">
+  <p class="founders-eyebrow reveal">Acceso anticipado — Drop 01</p>
+  <h2 class="founders-title reveal">Sé de los primeros.</h2>
+  <p class="founders-sub reveal">
+    Regístrate y recibe un <strong>10% exclusivo en tu primera compra</strong><br>
+    + acceso antes del lanzamiento oficial.<br>
+    Solo 300 unidades disponibles.
+  </p>
+  <form class="founders-form reveal" id="foundersForm" onsubmit="submitFounders(event)">
+    <input type="text" id="foundersName" placeholder="Tu nombre" required autocomplete="given-name">
+    <input type="tel" id="foundersPhone" placeholder="WhatsApp (ej: 3001234567)" required autocomplete="tel">
+    <button type="submit" class="founders-btn">Registrarme</button>
+  </form>
+  <div class="founders-success" id="foundersSuccess">
+    ✓ &nbsp;Listo — te contactamos por WhatsApp con tu código
+  </div>
+  <p class="founders-note reveal">Sin spam. Solo novedades de MOVA.</p>
+</section>
+
 <!-- ─── CTA FINAL ─── -->
 <section class="cta-section">
   <div class="cta-bg"></div>
@@ -2326,6 +2420,37 @@
     if (cartJustOpened) { cartJustOpened = false; return; }
     closeCart();
   });
+
+  // ─── LISTA DE FUNDADORES ───
+  // Reemplaza esta URL con la de tu Google Apps Script después de configurarlo
+  const FOUNDERS_SHEET_URL = 'PENDIENTE_URL_APPS_SCRIPT';
+
+  function submitFounders(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('foundersName').value.trim();
+    const telefono = document.getElementById('foundersPhone').value.trim();
+    if (!nombre || !telefono) return;
+
+    // Enviar datos a Google Sheets
+    if (FOUNDERS_SHEET_URL !== 'PENDIENTE_URL_APPS_SCRIPT') {
+      fetch(FOUNDERS_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, telefono, fecha: new Date().toISOString() })
+      });
+    }
+
+    // Mostrar mensaje de éxito
+    document.getElementById('foundersForm').style.display = 'none';
+    document.getElementById('foundersSuccess').style.display = 'block';
+
+    // Abrir WhatsApp de MOVA con mensaje prellenado
+    setTimeout(() => {
+      const msg = encodeURIComponent(`Hola MOVA! Me registré para el acceso anticipado del Drop 01. Mi nombre es ${nombre} 🤙`);
+      window.open(`https://wa.me/${MOVA_WA}?text=${msg}`, '_blank');
+    }, 1200);
+  }
 </script>
 
 <!-- ─── WA FLOAT ─── -->
