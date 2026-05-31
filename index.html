@@ -1428,47 +1428,29 @@
     </div>
     <div class="products-grid">
 
-      <!-- Product 1: Grip Socks -->
-      <div class="product-card">
+      <!-- Product 1: Grip Socks — Coming Soon -->
+      <div class="product-card coming-soon">
         <div class="product-stage">
-          <img id="socks-img" src="images/product-grip-socks.jpg" alt="MOVA Grip Socks">
+          <img src="images/product-grip-socks.jpg" alt="MOVA Grip Socks">
+          <div class="coming-soon-overlay">
+            <span class="coming-soon-badge">Próximamente</span>
+            <span class="coming-soon-drop">Drop 01 — 2026</span>
+          </div>
         </div>
         <div class="product-card-body">
-        <p class="product-tag">MOVA · 001</p>
-        <h3 class="product-name">Grip Socks</h3>
-        <p class="product-desc">Medias de alto rendimiento con puntos de silicona antideslizante. Diseñadas para atletas que necesitan control total dentro de su calzado.</p>
-        <div class="product-features">
-          <span class="feature-pill">Anti-Slip</span>
-          <span class="feature-pill">Compresión</span>
-          <span class="feature-pill">Airflow</span>
-          <span class="feature-pill">Estabilidad</span>
-        </div>
-        <div class="color-selector-wrap">
-          <p class="color-label">Elige tu color — <span id="socks-color-name">Negro</span></p>
-          <div class="color-opts">
-            <button class="color-opt selected" data-color="negro" onclick="pickSockColor(this, 'negro')">
-              <span class="color-swatch"></span>
-              <span class="color-opt-label">Negro</span>
-              <svg class="color-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </button>
-            <button class="color-opt" data-color="blanco" onclick="pickSockColor(this, 'blanco')">
-              <span class="color-swatch"></span>
-              <span class="color-opt-label">Blanco</span>
-              <svg class="color-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </button>
+          <div class="product-tag">MOVA · 001</div>
+          <h3 class="product-name">Grip Socks</h3>
+          <p class="product-desc">Medias de alto rendimiento con puntos de silicona antideslizante. Diseñadas para atletas que necesitan control total dentro de su calzado.</p>
+          <div class="product-features">
+            <span class="feature-pill">Anti-Slip</span>
+            <span class="feature-pill">Compresión</span>
+            <span class="feature-pill">Airflow</span>
+            <span class="feature-pill">Estabilidad</span>
           </div>
-        </div>
-
-        <div class="product-footer">
-          <div class="product-price"><strong>$45.000</strong> COP</div>
-          <div class="product-footer-btns">
-            <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20pedir%20las%20MOVA%20Grip%20Socks%20Vol.01" class="btn-wa-product" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.844L.057 23.868l6.195-1.45A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.009-1.374l-.358-.213-3.718.87.937-3.617-.234-.375A9.818 9.818 0 0112 2.182c5.427 0 9.818 4.391 9.818 9.818 0 5.428-4.391 9.818-9.818 9.818z"/></svg>
-              WA
-            </a>
-            <button class="btn-add-cart" id="socks-cart-btn" onclick="addToCart('Grip Socks — ' + document.getElementById('socks-color-name').textContent, 45000, this)">Agregar al carrito</button>
+          <div class="product-footer">
+            <div class="product-price" style="color:rgba(232,228,220,0.70); font-size:11px; letter-spacing:2px;">Precio por revelar</div>
+            <button class="notify-btn" onclick="openJoinModal()">Avísame cuando salga</button>
           </div>
-        </div>
         </div>
       </div>
 
@@ -2132,6 +2114,136 @@
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+
+  /* ─── JOIN MODAL ─── */
+  .join-modal-backdrop {
+    display: none;
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(8,8,8,0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .join-modal-backdrop.open { display: flex; }
+  .join-modal {
+    background: #111;
+    border: 0.5px solid rgba(232,228,220,0.1);
+    max-width: 440px; width: 100%;
+    padding: 48px 40px 40px;
+    position: relative;
+    animation: modalIn 0.35s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .join-modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 18px; color: rgba(232,228,220,0.3);
+    line-height: 1; padding: 4px;
+    transition: color 0.2s;
+  }
+  .join-modal-close:hover { color: rgba(232,228,220,0.8); }
+  .join-modal-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(232,228,220,0.35);
+    margin-bottom: 16px;
+  }
+  .join-modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 8vw, 52px);
+    letter-spacing: 2px; line-height: 1;
+    color: #e8e4dc;
+    margin-bottom: 12px;
+  }
+  .join-modal-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.5px; line-height: 1.75;
+    color: rgba(232,228,220,0.45);
+    margin-bottom: 32px;
+  }
+  .join-modal-field {
+    width: 100%;
+    background: rgba(232,228,220,0.04);
+    border: 0.5px solid rgba(232,228,220,0.12);
+    color: #e8e4dc;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 0.5px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .join-modal-field:focus { border-color: rgba(232,228,220,0.3); }
+  .join-modal-field::placeholder { color: rgba(232,228,220,0.25); }
+  .join-modal-phone-row {
+    display: flex; gap: 0; margin-bottom: 20px;
+  }
+  .join-modal-phone-row .country-select {
+    flex-shrink: 0;
+  }
+  .join-modal-phone-row .country-trigger {
+    background: rgba(232,228,220,0.04);
+    border: 0.5px solid rgba(232,228,220,0.12);
+    border-right: none;
+    color: #e8e4dc;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.5px;
+    padding: 14px 12px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    height: 100%;
+    white-space: nowrap;
+  }
+  .join-modal-phone-row input {
+    flex: 1;
+    background: rgba(232,228,220,0.04);
+    border: 0.5px solid rgba(232,228,220,0.12);
+    color: #e8e4dc;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 0.5px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .join-modal-phone-row input:focus { border-color: rgba(232,228,220,0.3); }
+  .join-modal-phone-row input::placeholder { color: rgba(232,228,220,0.25); }
+  .join-modal-btn {
+    width: 100%;
+    background: #e8e4dc; color: #080808;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    border: none; padding: 16px;
+    cursor: pointer; transition: opacity 0.2s;
+    margin-bottom: 16px;
+  }
+  .join-modal-btn:hover { opacity: 0.85; }
+  .join-modal-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(232,228,220,0.15); text-align: center;
+  }
+  .join-modal-success {
+    display: none; text-align: center; padding: 16px 0;
+  }
+  .join-modal-success-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 2px; color: #e8e4dc;
+    margin-bottom: 8px;
+  }
+  .join-modal-success-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 1px;
+    color: rgba(232,228,220,0.45); line-height: 1.7;
+  }
+  @media (max-width: 480px) {
+    .join-modal { padding: 40px 24px 32px; }
+  }
 </style>
 
 <!-- Overlay -->
@@ -2462,7 +2574,114 @@
       window.open(`https://wa.me/${MOVA_WA}?text=${msg}`, '_blank');
     }, 1200);
   }
+
+  // ─── JOIN MODAL ───
+  let joinCountryCode = '+57';
+
+  function openJoinModal() {
+    document.getElementById('joinModal').classList.add('open');
+  }
+  function closeJoinModal(e) {
+    if (e && e.target !== document.getElementById('joinModal')) return;
+    document.getElementById('joinModal').classList.remove('open');
+  }
+  function toggleJoinCountry() {
+    document.getElementById('joinCountrySelect').classList.toggle('open');
+  }
+  function selectJoinCountry(flag, code) {
+    joinCountryCode = code;
+    document.getElementById('joinCountryFlag').textContent = flag;
+    document.getElementById('joinCountryCode').textContent = code;
+    document.getElementById('joinCountrySelect').classList.remove('open');
+    document.getElementById('joinModalPhone').focus();
+  }
+  document.addEventListener('click', function(e) {
+    const jcs = document.getElementById('joinCountrySelect');
+    if (jcs && !jcs.contains(e.target)) jcs.classList.remove('open');
+  });
+
+  function submitJoinModal(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('joinModalName').value.trim();
+    const numero = document.getElementById('joinModalPhone').value.trim().replace(/\s/g, '');
+    const telefono = joinCountryCode + ' ' + document.getElementById('joinModalPhone').value.trim();
+    if (!nombre || !numero) return;
+
+    const btn = document.querySelector('#joinModalForm .join-modal-btn');
+    btn.textContent = '...';
+    btn.disabled = true;
+
+    fetch(FOUNDERS_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, telefono, fecha: new Date().toISOString(), fuente: 'popup' })
+    });
+
+    sessionStorage.setItem('mova_popup_seen', '1');
+    document.getElementById('joinModalForm').style.display = 'none';
+    document.querySelector('.join-modal-note').style.display = 'none';
+    document.getElementById('joinModalSuccess').style.display = 'block';
+
+    setTimeout(() => {
+      document.getElementById('joinModal').classList.remove('open');
+      // Reset for "Avísame" re-open
+      setTimeout(() => {
+        document.getElementById('joinModalForm').style.display = '';
+        document.querySelector('.join-modal-note').style.display = '';
+        document.getElementById('joinModalSuccess').style.display = 'none';
+        btn.textContent = 'Unirme a la familia';
+        btn.disabled = false;
+      }, 400);
+    }, 2200);
+  }
+
+  // Auto-show after 5 seconds — only once per session
+  if (!sessionStorage.getItem('mova_popup_seen')) {
+    setTimeout(openJoinModal, 5000);
+  }
+
 </script>
+
+<!-- ─── JOIN MODAL ─── -->
+<div class="join-modal-backdrop" id="joinModal" onclick="closeJoinModal(event)">
+  <div class="join-modal" role="dialog" aria-modal="true" aria-labelledby="joinModalTitle">
+    <button class="join-modal-close" onclick="closeJoinModal()" aria-label="Cerrar">✕</button>
+    <div id="joinModalBody">
+      <p class="join-modal-eyebrow">Comunidad MOVA · Drop 01</p>
+      <h2 class="join-modal-title" id="joinModalTitle">Únete<br>a la familia.</h2>
+      <p class="join-modal-sub">
+        Sé el primero en enterarte del lanzamiento,<br>
+        precios y acceso anticipado.
+      </p>
+      <form id="joinModalForm" onsubmit="submitJoinModal(event)">
+        <input type="text" class="join-modal-field" id="joinModalName" placeholder="Tu nombre" required autocomplete="given-name">
+        <div class="join-modal-phone-row">
+          <div class="country-select" id="joinCountrySelect">
+            <button type="button" class="country-trigger" onclick="toggleJoinCountry()">
+              <span id="joinCountryFlag">🇨🇴</span>
+              <span id="joinCountryCode">+57</span>
+              <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" width="8"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <div class="country-dropdown">
+              <div class="country-option" onclick="selectJoinCountry('🇨🇴','+57')">🇨🇴 &nbsp;+57 &nbsp;Colombia</div>
+              <div class="country-option" onclick="selectJoinCountry('🇺🇸','+1')">🇺🇸 &nbsp;+1 &nbsp;USA</div>
+              <div class="country-option" onclick="selectJoinCountry('🇲🇽','+52')">🇲🇽 &nbsp;+52 &nbsp;México</div>
+              <div class="country-option" onclick="selectJoinCountry('🇦🇷','+54')">🇦🇷 &nbsp;+54 &nbsp;Argentina</div>
+            </div>
+          </div>
+          <input type="tel" id="joinModalPhone" placeholder="300 123 4567" required autocomplete="tel">
+        </div>
+        <button type="submit" class="join-modal-btn">Unirme a la familia</button>
+      </form>
+      <p class="join-modal-note">Sin spam. Solo lo importante de MOVA.</p>
+    </div>
+    <div class="join-modal-success" id="joinModalSuccess">
+      <p class="join-modal-success-title">Bienvenido.</p>
+      <p class="join-modal-success-sub">Ya eres parte de esto.<br>Te llegará todo por WhatsApp.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ─── WA FLOAT ─── -->
 <a href="https://wa.me/573000000000?text=Hola!%20Quiero%20info%20sobre%20los%20productos%20MOVA" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
