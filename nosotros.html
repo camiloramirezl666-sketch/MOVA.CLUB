@@ -382,6 +382,112 @@
       .about-close { padding: 60px 24px; }
     }
 
+    /* ─── INSTAGRAM + JOIN ─── */
+    .about-join {
+      padding: 80px 48px;
+      border-top: 0.5px solid var(--line);
+      text-align: center;
+    }
+    .about-join-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--fg-muted); margin-bottom: 32px;
+    }
+    .about-join-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: 2px; line-height: 1;
+      color: var(--fg); margin-bottom: 16px;
+    }
+    .about-join-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 1px; line-height: 1.8;
+      color: var(--fg-muted); margin-bottom: 48px;
+    }
+    .about-ig-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--bg); background: var(--fg);
+      text-decoration: none;
+      padding: 14px 28px;
+      transition: opacity 0.2s;
+      margin-bottom: 48px;
+    }
+    .about-ig-btn:hover { opacity: 0.85; }
+    .about-divider {
+      border: none;
+      border-top: 0.5px solid var(--line);
+      margin: 48px auto;
+      max-width: 480px;
+    }
+    .about-form-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--fg-muted); margin-bottom: 20px;
+    }
+    .about-form {
+      display: flex; gap: 0;
+      max-width: 520px; margin: 0 auto 12px;
+    }
+    .about-form input {
+      flex: 1;
+      background: rgba(232,228,220,0.04);
+      border: 0.5px solid rgba(232,228,220,0.12);
+      color: var(--fg);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.5px;
+      padding: 14px 16px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .about-form input:focus { border-color: rgba(232,228,220,0.3); }
+    .about-form input::placeholder { color: rgba(232,228,220,0.25); }
+    .about-form input:first-child { border-right: none; }
+    .about-phone-wrap {
+      display: flex; flex: 1.2;
+    }
+    .about-country-trigger {
+      background: rgba(232,228,220,0.04);
+      border: 0.5px solid rgba(232,228,220,0.12);
+      border-right: none;
+      color: var(--fg);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.5px;
+      padding: 14px 10px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 5px;
+      white-space: nowrap;
+    }
+    .about-phone-wrap input { border-left: none; }
+    .about-form-btn {
+      background: var(--fg); color: var(--bg);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      border: none; padding: 14px 24px;
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .about-form-btn:hover { opacity: 0.85; }
+    .about-form-success {
+      display: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--fg-muted); margin-top: 8px;
+    }
+    .about-form-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(232,228,220,0.12);
+    }
+    @media (max-width: 768px) {
+      .about-join { padding: 60px 24px; }
+      .about-form { flex-direction: column; }
+      .about-form input, .about-phone-wrap { border-right: 0.5px solid rgba(232,228,220,0.12); }
+      .about-form input:first-child { border-right: 0.5px solid rgba(232,228,220,0.12); border-bottom: none; }
+      .about-phone-wrap input { border-left: 0.5px solid rgba(232,228,220,0.12); }
+      .about-form-btn { padding: 16px; }
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 0.5px solid var(--line);
@@ -507,7 +613,7 @@
 <div class="about-body">
   <p>A los 19 me gané una beca deportiva para jugar en Georgetown University, en Estados Unidos. Nuevo país, nuevo idioma, solo. Lejos de mi familia, de mi tierra, de todo lo conocido. Fue el capítulo más difícil y el más formativo de mi vida.</p>
   <p>En mi segundo año, con 21 años, llegó la tercera. Otro ligamento cruzado. En suelo extranjero, sin mi familia cerca, en medio de mis estudios y mi carrera deportiva. Ese fue el momento que me redefinió por completo.</p>
-  <p>Porque esta vez no solo me recuperé físicamente. Me senté a estudiar cada producto, cada tecnología, cada método que me ayudó a volver más rápido y más fuerte. Entendí que los accesorios correctos no son un lujo — son una herramienta que cambia el resultado.</p>
+  <p>Porque esta vez no solo me recuperé físicamente. Me senté a estudiar cada producto, cada tecnología, cada método que me ayudó a volver más rápido y más fuerte. Entendí que los accesorios correctos no son un lujo, son una herramienta que cambia el resultado.</p>
   <p>En mi última temporada, volví al campo. Fui capitán de mi equipo y el jugador con más minutos de toda la temporada. No porque todo hubiera salido perfecto. Sino porque nunca paré de moverme.</p>
 </div>
 
@@ -549,6 +655,35 @@
   <a href="/#products" class="about-cta">Ver la colección →</a>
 </div>
 
+<!-- ─── INSTAGRAM + JOIN ─── -->
+<div class="about-join">
+  <p class="about-join-eyebrow">Síguenos</p>
+  <h2 class="about-join-title">Únete a la familia.</h2>
+  <p class="about-join-sub">Sé el primero en enterarte del lanzamiento,<br>contenido exclusivo y acceso anticipado.</p>
+
+  <a href="https://www.instagram.com/mova.grip/" class="about-ig-btn" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    @mova.grip
+  </a>
+
+  <hr class="about-divider">
+
+  <p class="about-form-label">Registro acceso anticipado</p>
+  <form class="about-form" id="aboutJoinForm" onsubmit="submitAboutForm(event)">
+    <input type="text" id="aboutName" placeholder="Tu nombre" required autocomplete="given-name">
+    <div class="about-phone-wrap">
+      <button type="button" class="about-country-trigger" id="aboutCountryTrigger" onclick="this.nextElementSibling.nextElementSibling && null">
+        <span id="aboutCountryFlag">🇨🇴</span>
+        <span id="aboutCountryCode">+57</span>
+      </button>
+      <input type="tel" id="aboutPhone" placeholder="300 123 4567" required autocomplete="tel">
+    </div>
+    <button type="submit" class="about-form-btn">Registrarme</button>
+  </form>
+  <div class="about-form-success" id="aboutFormSuccess">✓ &nbsp;Listo — te avisamos por WhatsApp</div>
+  <p class="about-form-note">Sin spam. Solo lo importante de MOVA.</p>
+</div>
+
 <!-- ─── FOOTER ─── -->
 <footer>
   <a href="/" class="footer-logo">MOVA.</a>
@@ -559,6 +694,31 @@
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
     document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  const FOUNDERS_URL = 'https://script.google.com/macros/s/AKfycbzwkRqFFaA5F_nLYe4gS71ROe77SeubWKXlcNYLTZYNcnZpdKT4NEXdQwqe93JlEbsv/exec';
+
+  function submitAboutForm(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('aboutName').value.trim();
+    const code = document.getElementById('aboutCountryCode').textContent;
+    const num = document.getElementById('aboutPhone').value.trim();
+    const telefono = code + ' ' + num;
+    if (!nombre || !num) return;
+
+    const btn = document.querySelector('#aboutJoinForm .about-form-btn');
+    btn.textContent = '...';
+    btn.disabled = true;
+
+    fetch(FOUNDERS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, telefono, fecha: new Date().toISOString(), fuente: 'about' })
+    });
+
+    document.getElementById('aboutJoinForm').style.display = 'none';
+    document.getElementById('aboutFormSuccess').style.display = 'block';
   }
 </script>
 </body>
