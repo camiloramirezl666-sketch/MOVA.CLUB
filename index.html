@@ -1040,132 +1040,111 @@
     text-transform: uppercase;
   }
 
-  /* ─── Featured Testimonial ─── */
-  .testimonial-featured {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 0.5px solid rgba(232,228,220,0.08);
-    margin-top: 80px;
-    margin-bottom: 1px;
+  /* ─── ATHLETE CAROUSEL ─── */
+  .testimonials { padding: 120px 0 0; border-top: 0.5px solid rgba(232,228,220,0.08); background: #080808; }
+  .testimonials-top {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 0 80px 56px;
   }
-  .testimonial-featured-img {
-    overflow: hidden;
-    max-height: 520px;
-  }
-  .testimonial-featured-img img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 90%;
-    display: block;
-    filter: grayscale(15%);
-    transition: transform 0.6s ease;
-  }
-  .testimonial-featured-img:hover img { transform: scale(1.03); }
-  .testimonial-featured-body {
-    padding: 64px 56px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: #080808;
-    border-left: 0.5px solid rgba(232,228,220,0.08);
-  }
-  .testimonial-featured-stars {
-    display: flex; gap: 4px; margin-bottom: 32px;
-  }
-  .testimonial-featured-quote {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(24px, 3vw, 36px);
-    line-height: 1.2;
-    letter-spacing: 1px;
-    color: #e8e4dc;
-    margin-bottom: 40px;
-  }
-  .testimonial-featured-author {
-    display: flex; align-items: center; gap: 16px;
-    border-top: 0.5px solid rgba(232,228,220,0.08);
-    padding-top: 28px;
-  }
-  .testimonial-featured-avatar {
+  .t-nav { display: flex; gap: 8px; }
+  .t-btn {
     width: 52px; height: 52px;
-    border-radius: 50%;
-    overflow: hidden; flex-shrink: 0;
+    border: 0.5px solid rgba(232,228,220,0.15);
+    background: transparent; color: #e8e4dc;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
   }
-  .testimonial-featured-avatar img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center top;
-  }
-  .testimonial-featured-name {
-    font-size: 14px; font-weight: 500;
-    color: #e8e4dc;
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 4px;
-  }
-  .testimonial-featured-sport {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(232,228,220,0.45);
-  }
-  @media (max-width: 768px) {
-    .testimonial-featured { grid-template-columns: 1fr; }
-    .testimonial-featured-img { max-height: 320px; border-left: none; border-bottom: 0.5px solid rgba(232,228,220,0.08); }
-    .testimonial-featured-body { padding: 40px 24px; border-left: none; }
+  .t-btn:hover { background: rgba(232,228,220,0.07); border-color: rgba(232,228,220,0.3); }
+  .t-btn svg { width: 18px; height: 18px; }
+
+  .t-viewport { overflow: hidden; width: 100%; cursor: grab; user-select: none; }
+  .t-viewport:active { cursor: grabbing; }
+  .t-track {
+    display: flex;
+    transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
-  /* ─── ATHLETE TESTIMONIAL GRID ─── */
-  .athlete-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: rgba(232,228,220,0.06);
-    margin-top: 60px;
-  }
-  .athlete-card {
-    background: #080808;
+  .t-slide {
+    min-width: 75vw;
+    height: 680px;
+    position: relative;
     overflow: hidden;
+    flex-shrink: 0;
+    border-right: 0.5px solid rgba(232,228,220,0.06);
   }
-  .athlete-card-img {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
+  .t-slide-img {
+    position: absolute; inset: 0;
   }
-  .athlete-card-img img {
+  .t-slide-img img {
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: grayscale(10%);
-    transition: transform 0.7s ease;
+    filter: brightness(0.55) grayscale(8%);
     display: block;
+    transition: transform 8s ease;
   }
-  .athlete-card:hover .athlete-card-img img { transform: scale(1.03); }
-  .athlete-card-body {
-    padding: 48px 40px 52px;
-    border-top: 0.5px solid rgba(232,228,220,0.08);
+  .t-slide.active .t-slide-img img { transform: scale(1.04); }
+  .t-slide-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(8,8,8,0.96) 0%,
+      rgba(8,8,8,0.55) 45%,
+      rgba(8,8,8,0.1) 100%
+    );
   }
-  .athlete-quote {
-    font-size: 15px; line-height: 1.8;
-    color: rgba(232,228,220,0.75);
-    font-style: italic;
-    margin: 20px 0 36px;
+  .t-slide-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 56px 72px;
   }
-  .athlete-author-row {
-    display: flex; align-items: center; gap: 14px;
+  .t-slide-stars { display: flex; gap: 4px; margin-bottom: 20px; }
+  .t-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3.2vw, 48px);
+    line-height: 1.1; letter-spacing: 1.5px;
+    color: #e8e4dc;
+    max-width: 680px;
+    margin-bottom: 40px;
   }
-  .athlete-author-info a { text-decoration: none; }
-  .athlete-name {
+  .t-author-row {
+    display: flex; align-items: center; gap: 0;
+    border-top: 0.5px solid rgba(232,228,220,0.12);
+    padding-top: 24px;
+  }
+  .t-name {
     font-family: 'DM Mono', monospace;
-    font-size: 11px; letter-spacing: 2px;
+    font-size: 11px; letter-spacing: 3px;
     color: #e8e4dc; text-transform: uppercase;
-    display: flex; align-items: center; gap: 7px;
+    display: flex; align-items: center; gap: 8px;
   }
-  .athlete-sport {
+  .t-name a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .t-name a:hover { color: rgba(232,228,220,0.7); }
+  .t-sport {
     font-family: 'DM Mono', monospace;
     font-size: 9px; letter-spacing: 2px;
-    color: rgba(232,228,220,0.3); text-transform: uppercase;
-    margin-top: 5px;
+    color: rgba(232,228,220,0.35); text-transform: uppercase;
+    margin-top: 6px;
   }
+
+  .t-dots {
+    display: flex; gap: 8px;
+    justify-content: center;
+    padding: 40px 0 80px;
+  }
+  .t-dot {
+    width: 24px; height: 2px;
+    background: rgba(232,228,220,0.18);
+    border: none; cursor: pointer;
+    transition: background 0.3s, width 0.3s;
+    padding: 0;
+  }
+  .t-dot.active { background: #e8e4dc; width: 48px; }
+
   @media (max-width: 768px) {
-    .athlete-grid { grid-template-columns: 1fr; }
-    .athlete-card-img { height: 340px; }
-    .athlete-card-body { padding: 36px 24px 40px; }
+    .testimonials-top { padding: 0 24px 40px; }
+    .t-slide { min-width: 90vw; height: 520px; }
+    .t-slide-content { padding: 36px 28px; }
+    .t-quote { font-size: clamp(22px, 5.5vw, 32px); }
   }
 
   /* ─── CTA Section ─── */
@@ -1796,58 +1775,70 @@
 
 <!-- ─── TESTIMONIALS ─── -->
 <section class="testimonials" id="testimonials">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <p class="section-eyebrow">Atletas · Reviews</p>
-        <h2 class="section-title">Lo que dicen</h2>
-      </div>
-    </div>
-    <div class="athlete-grid">
 
-      <!-- Nicolás Del Águila -->
-      <div class="athlete-card reveal">
-        <div class="athlete-card-img">
-          <img src="images/atleta-nicolas.jpg" alt="Nicolás Del Águila usando MOVA Grip Socks" style="object-position: center 90%;">
+  <!-- Header + flechas -->
+  <div class="testimonials-top reveal">
+    <div>
+      <p class="section-eyebrow">Atletas · Reviews</p>
+      <h2 class="section-title">Lo que dicen</h2>
+    </div>
+    <div class="t-nav">
+      <button class="t-btn t-prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="t-btn t-next" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Carrusel -->
+  <div class="t-viewport">
+    <div class="t-track" id="tTrack">
+
+      <!-- Slide 1: Nicolás Del Águila -->
+      <div class="t-slide active">
+        <div class="t-slide-img">
+          <img src="images/atleta-nicolas.jpg" alt="Nicolás Del Águila" style="object-position: center 90%;">
         </div>
-        <div class="athlete-card-body">
-          <div class="testimonial-stars">
+        <div class="t-slide-overlay"></div>
+        <div class="t-slide-content">
+          <div class="t-slide-stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
           </div>
-          <p class="athlete-quote">"El pie se siente completamente fijo dentro del guayo. Sensación profesional de verdad, control total en cada movimiento. Ya las uso en todos mis partidos, sin excepción."</p>
-          <div class="athlete-author-row">
-            <div class="athlete-author-info">
-              <a href="https://www.instagram.com/nicolas.del10/" target="_blank" rel="noopener noreferrer">
-                <div class="athlete-name">
-                  Nicolás Del Águila
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11" style="color:rgba(232,228,220,0.35);"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </div>
-              </a>
-              <div class="athlete-sport">Futbolista Semiprofesional</div>
+          <blockquote class="t-quote">"El pie se siente completamente fijo dentro del guayo. Sensación profesional de verdad, control total en cada movimiento. Ya las uso en todos mis partidos, sin excepción."</blockquote>
+          <div class="t-author-row">
+            <div>
+              <div class="t-name">
+                <a href="https://www.instagram.com/nicolas.del10/" target="_blank" rel="noopener noreferrer">Nicolás Del Águila
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11" style="opacity:.55;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+              </div>
+              <div class="t-sport">Futbolista Semiprofesional</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Camilo Ramírez -->
-      <div class="athlete-card reveal reveal-delay-1">
-        <div class="athlete-card-img">
-          <img src="images/atleta-camilo.jpg" alt="Camilo Ramírez, Georgetown University" style="object-position: center 65%;">
+      <!-- Slide 2: Camilo Ramírez -->
+      <div class="t-slide">
+        <div class="t-slide-img">
+          <img src="images/atleta-camilo.jpg" alt="Camilo Ramírez" style="object-position: center 65%;">
         </div>
-        <div class="athlete-card-body">
-          <div class="testimonial-stars">
+        <div class="t-slide-overlay"></div>
+        <div class="t-slide-content">
+          <div class="t-slide-stars">
             <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
           </div>
-          <p class="athlete-quote">"Jugué la última temporada universitaria con las medias de MOVA y su comodidad me ayudó a rendir mejor en cada partido. Lo que más me gustó es la sensación en el pie y cómo previenen lesiones al mantenerlo completamente fijo dentro del guayo."</p>
-          <div class="athlete-author-row">
-            <div class="athlete-author-info">
-              <a href="https://www.instagram.com/camiloramirezlopez/" target="_blank" rel="noopener noreferrer">
-                <div class="athlete-name">
-                  Camilo Ramírez
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11" style="color:rgba(232,228,220,0.35);"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </div>
-              </a>
-              <div class="athlete-sport">Futbolista · Georgetown University</div>
+          <blockquote class="t-quote">"Jugué la última temporada universitaria con las medias de MOVA y su comodidad me ayudó a rendir mejor en cada partido. Lo que más me gustó es la sensación en el pie y cómo previenen lesiones al mantenerlo completamente fijo dentro del guayo."</blockquote>
+          <div class="t-author-row">
+            <div>
+              <div class="t-name">
+                <a href="https://www.instagram.com/camiloramirezlopez/" target="_blank" rel="noopener noreferrer">Camilo Ramírez
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11" style="opacity:.55;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+              </div>
+              <div class="t-sport">Futbolista · Georgetown University</div>
             </div>
           </div>
         </div>
@@ -1855,6 +1846,13 @@
 
     </div>
   </div>
+
+  <!-- Dots indicadores -->
+  <div class="t-dots" id="tDots">
+    <button class="t-dot active" aria-label="Slide 1"></button>
+    <button class="t-dot" aria-label="Slide 2"></button>
+  </div>
+
 </section>
 
 
@@ -2865,6 +2863,56 @@
       window.open(`https://wa.me/${MOVA_WA}?text=${msg}`, '_blank');
     }, 1200);
   }
+
+  // ─── TESTIMONIAL CAROUSEL ───
+  (function() {
+    const track = document.getElementById('tTrack');
+    if (!track) return;
+    const slides = track.querySelectorAll('.t-slide');
+    const dots = document.querySelectorAll('#tDots .t-dot');
+    let current = 0;
+    const total = slides.length;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      current = (idx + total) % total;
+      slides[current].classList.add('active');
+      track.style.transform = `translateX(-${current * slides[0].offsetWidth}px)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.querySelector('.t-prev').addEventListener('click', () => goTo(current - 1));
+    document.querySelector('.t-next').addEventListener('click', () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+    // Drag / swipe
+    let startX = 0, dragging = false, startTranslate = 0;
+    track.addEventListener('mousedown', e => { dragging = true; startX = e.clientX; track.style.transition = 'none'; });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      track.style.transform = `translateX(${-current * slides[0].offsetWidth + (e.clientX - startX)}px)`;
+    });
+    window.addEventListener('mouseup', e => {
+      if (!dragging) return;
+      dragging = false;
+      track.style.transition = '';
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 60) goTo(diff > 0 ? current + 1 : current - 1);
+      else track.style.transform = `translateX(-${current * slides[0].offsetWidth}px)`;
+    });
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${current * slides[0].offsetWidth}px)`;
+      requestAnimationFrame(() => { track.style.transition = ''; });
+    });
+  })();
 
   // ─── JOIN MODAL ───
   let joinCountryCode = '+57';
