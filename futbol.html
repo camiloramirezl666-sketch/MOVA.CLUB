@@ -226,8 +226,19 @@
     background: #070707; padding: 48px 36px;
   }
   .pain-icon {
-    font-size: 32px; margin-bottom: 20px;
-    line-height: 1;
+    width: 48px; height: 48px;
+    margin-bottom: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border: 0.5px solid rgba(232,228,220,0.12);
+    filter: drop-shadow(0 0 10px rgba(232,228,220,0.10));
+  }
+  .pain-icon svg {
+    width: 26px; height: 26px;
+    stroke: rgba(232,228,220,0.62);
+    fill: none;
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
   .pain-title {
     font-size: 15px; font-weight: 500; color: #e8e4dc;
@@ -568,17 +579,39 @@
     <h2 class="big-title reveal" style="font-size: clamp(40px,6vw,72px);">Lo que te está costando rendimiento</h2>
     <div class="pain-grid">
       <div class="pain-card reveal rd1">
-        <div class="pain-icon">⚡</div>
+        <div class="pain-icon">
+          <!-- Pulse waveform: energy disruption / slip -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 12 L6 12 L8 6 L11 18 L14 9 L16 12 L22 12"/>
+          </svg>
+        </div>
         <div class="pain-title">Pie que resbala dentro del guayo</div>
         <p class="pain-text">Cada cambio de dirección, cada frenada, el pie se desliza milímetros. Esos milímetros se convierten en energía perdida, menos precisión y más fatiga. No lo ves, pero lo sientes al final del partido.</p>
       </div>
       <div class="pain-card reveal rd2">
-        <div class="pain-icon">🔥</div>
+        <div class="pain-icon">
+          <!-- Friction: two opposing forces -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="2" y1="12" x2="9" y2="12"/>
+            <polyline points="7,9 10.5,12 7,15"/>
+            <line x1="22" y1="12" x2="15" y2="12"/>
+            <polyline points="17,9 13.5,12 17,15"/>
+            <line x1="2" y1="6" x2="22" y2="6"/>
+            <line x1="2" y1="18" x2="22" y2="18"/>
+          </svg>
+        </div>
         <div class="pain-title">Ampollas y rozaduras que te limitan</div>
         <p class="pain-text">La fricción constante entre el pie y el calcetín —o directamente con el guayo— genera ampollas. Eso no es inevitable. Es el resultado de no tener la media correcta. Muchos atletas ni lo cuestionan.</p>
       </div>
       <div class="pain-card reveal rd3">
-        <div class="pain-icon">📉</div>
+        <div class="pain-icon">
+          <!-- Declining performance chart -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="3,3 3,21 21,21"/>
+            <polyline points="3,7 8,13 13,10 21,18"/>
+            <polyline points="17,18 21,18 21,14"/>
+          </svg>
+        </div>
         <div class="pain-title">Fatiga muscular innecesaria</div>
         <p class="pain-text">Sin compresión gradual, los músculos de la pantorrilla y el pie trabajan más de lo necesario para estabilizarse. Llegas al minuto 70 con piernas pesadas que en realidad no deberían estarlo.</p>
       </div>
